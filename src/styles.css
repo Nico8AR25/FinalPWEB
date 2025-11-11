@@ -1,0 +1,1017 @@
+/* ========== TWITCH-INSPIRED STYLES ========== */
+@import url('https://fonts.cdnfonts.com/css/robert');
+
+/* Colores principales de Twitch */
+:root {
+  --twitch-purple: #9146FF;
+  --twitch-purple-dark: #772CE8;
+  --twitch-purple-hover: #A970FF;
+  --twitch-bg: #18181B;
+  --twitch-bg-secondary: #1F1F23;
+  --twitch-bg-tertiary: #26262C;
+  --twitch-text: #EFEFF1;
+  --twitch-text-secondary: #ADADB8;
+  --twitch-border: #3A3A3D;
+  --twitch-red: #E91916;
+  --twitch-red-hover: #FF0000;
+  --twitch-green: #00D166;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--twitch-bg);
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  color: var(--twitch-text);
+  line-height: 1.6;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: var(--twitch-text);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--twitch-purple);
+}
+
+/* ========== NAVBAR STYLES (Sticky como Twitch) ========== */
+header.navbar {
+  background-color: var(--twitch-bg-secondary);
+  padding: 0;
+  border-bottom: 1px solid var(--twitch-border);
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.navbar-brand h1, .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--twitch-purple);
+  letter-spacing: -0.5px;
+  margin: 0;
+  font-family: 'Roobert', -apple-system, sans-serif;
+}
+
+.navbar-actions, .navbar-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 24px;
+  flex-wrap: wrap;
+}
+
+/* ========== BUTTONS (Estilo Twitch) ========== */
+.btn, .perfil-button, .logout-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background-color: var(--twitch-purple);
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--twitch-purple-hover);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background-color: var(--twitch-red);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--twitch-red-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--twitch-purple);
+  border: 1px solid var(--twitch-purple);
+}
+
+.btn-outline:hover {
+  background-color: var(--twitch-purple);
+  color: white;
+}
+
+.perfil-button, .logout-button {
+  background-color: transparent;
+  color: var(--twitch-text);
+  border: 1px solid var(--twitch-border);
+}
+
+.perfil-button:hover, .logout-button:hover {
+  background-color: var(--twitch-bg-tertiary);
+  border-color: var(--twitch-purple);
+  color: var(--twitch-purple);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.monedas {
+  font-size: 14px;
+  background-color: var(--twitch-bg-tertiary);
+  padding: 6px 12px;
+  border-radius: 4px;
+  color: var(--twitch-text);
+  border: 1px solid var(--twitch-border);
+}
+
+.xp-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--twitch-text);
+}
+
+/* ========== PAGE WRAPPER ========== */
+.page-wrapper {
+  background-color: var(--twitch-bg);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--twitch-bg);
+}
+
+/* ========== LOGIN PAGE ========== */
+.login-center {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--twitch-bg) 0%, var(--twitch-bg-secondary) 100%);
+}
+
+.contenedor {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+}
+
+.marca-universidad {
+  margin-bottom: 40px;
+}
+
+.imagen-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  display: block;
+  border-radius: 12px;
+}
+
+.titulo-universidad {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.5px;
+  color: var(--twitch-purple);
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.grupo-formulario {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.grupo-formulario label {
+  color: var(--twitch-text);
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.grupo-formulario input {
+  background: var(--twitch-bg-secondary);
+  border: 1px solid var(--twitch-border);
+  color: var(--twitch-text);
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 4px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.grupo-formulario input:focus {
+  border-color: var(--twitch-purple);
+  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.grupo-formulario input::placeholder {
+  color: var(--twitch-text-secondary);
+}
+
+.boton-login {
+  background: var(--twitch-purple);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.boton-login:hover {
+  background: var(--twitch-purple-hover);
+  transform: translateY(-1px);
+}
+
+.navegacion-principal {
+  margin-bottom: 24px;
+}
+
+.enlaces-navegacion {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.enlaces-navegacion a {
+  color: var(--twitch-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.enlaces-navegacion a:hover {
+  color: var(--twitch-purple);
+}
+
+.pie-pagina {
+  color: var(--twitch-text-secondary);
+  font-size: 12px;
+  margin-top: 24px;
+}
+
+.pie-pagina p {
+  margin: 0;
+}
+
+/* ========== MAIN CONTENT ========== */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: calc(100vh - 80px);
+}
+
+/* ========== CONTAINER STYLES ========== */
+.container, .container-general {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 24px;
+  width: 100%;
+}
+
+.card {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--twitch-border);
+  margin-bottom: 24px;
+}
+
+.card h2 {
+  color: var(--twitch-text);
+  margin-bottom: 24px;
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rtmp-connected {
+  color: var(--twitch-green);
+  font-weight: 600;
+}
+
+.rtmp-disconnected {
+  color: var(--twitch-red);
+  font-weight: 600;
+}
+
+.progress-container {
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--twitch-bg-tertiary);
+  border-radius: 8px;
+  border: 1px solid var(--twitch-border);
+}
+
+.progress-label {
+  font-weight: 600;
+  color: var(--twitch-text);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.progress {
+  width: 100%;
+  height: 24px;
+  background: var(--twitch-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--twitch-purple), var(--twitch-purple-dark));
+  border-radius: 12px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.progress-text {
+  text-align: center;
+  font-size: 14px;
+  color: var(--twitch-text-secondary);
+  font-weight: 500;
+}
+
+.metric {
+  background: var(--twitch-bg-tertiary);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--twitch-text);
+  border: 1px solid var(--twitch-border);
+}
+
+/* ========== GIFTS PANEL ========== */
+.gifts-panel {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--twitch-bg-tertiary);
+  border: 1px solid var(--twitch-border);
+}
+
+.gifts-title {
+  color: var(--twitch-purple);
+  text-align: center;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.gifts-subtitle {
+  color: var(--twitch-text-secondary);
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.gift-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  text-align: center;
+  padding: 16px;
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--twitch-border);
+}
+
+.stat-number {
+  font-size: 2rem;
+  color: var(--twitch-purple);
+  font-weight: 700;
+}
+
+.stat-label {
+  color: var(--twitch-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.empty-box {
+  padding: 20px;
+  border-radius: 8px;
+  background: var(--twitch-bg-secondary);
+  color: var(--twitch-text-secondary);
+  text-align: center;
+  border: 1px solid var(--twitch-border);
+}
+
+.text-secondary {
+  color: var(--twitch-text-secondary);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ========== SPECTATOR DASHBOARD ========== */
+.welcome-section {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 24px;
+  border: 1px solid var(--twitch-border);
+}
+
+.welcome-section h2 {
+  color: var(--twitch-text);
+  font-size: 2rem;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.user-role {
+  font-size: 16px;
+  color: var(--twitch-text-secondary);
+  font-weight: 500;
+}
+
+.user-level-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding: 20px;
+  background: var(--twitch-bg-tertiary);
+  border-radius: 8px;
+  border: 1px solid var(--twitch-border);
+  justify-content: center;
+}
+
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--twitch-purple);
+  padding: 12px 20px;
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.level-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+.level-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.points-info {
+  font-size: 16px;
+  color: var(--twitch-text);
+  font-weight: 600;
+}
+
+.search-section {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid var(--twitch-border);
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  gap: 8px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--twitch-border);
+  border-radius: 4px;
+  background: var(--twitch-bg-tertiary);
+  color: var(--twitch-text);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--twitch-text-secondary);
+}
+
+.search-input:focus {
+  border-color: var(--twitch-purple);
+  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.search-button, .view-streams-btn {
+  padding: 12px 24px;
+  background: var(--twitch-purple);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.search-button:hover, .view-streams-btn:hover {
+  background: var(--twitch-purple-hover);
+  transform: translateY(-1px);
+}
+
+.gifts-section {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid var(--twitch-border);
+  margin-bottom: 24px;
+}
+
+.gifts-section h3 {
+  color: var(--twitch-text);
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.gifts-link {
+  color: var(--twitch-text);
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.gifts-link:hover {
+  transform: translateY(-2px);
+  color: var(--twitch-purple);
+}
+
+.gifts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.purchased-gifts-section {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 24px;
+  border: 1px solid var(--twitch-border);
+}
+
+.purchased-gifts-section h3 {
+  color: var(--twitch-text);
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+/* ========== STREAM PREVIEW (Manager) ========== */
+.sm-topbar {
+  background: var(--twitch-bg-secondary);
+  color: var(--twitch-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--twitch-border);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.sm-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--twitch-text);
+}
+
+.sm-metrics {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.metric-badge {
+  background: var(--twitch-bg-tertiary);
+  color: var(--twitch-text);
+  border: 1px solid var(--twitch-border);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 100px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.metric-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sm-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr 340px;
+  gap: 16px;
+  padding: 16px;
+  background: var(--twitch-bg);
+}
+
+.sm-col {
+  display: grid;
+  gap: 16px;
+  grid-template-rows: 1fr 1fr;
+}
+
+.fill-col {
+  height: calc(100vh - 120px);
+}
+
+.grow {
+  height: 100%;
+  overflow: auto;
+}
+
+.sm-panel {
+  background: var(--twitch-bg-secondary);
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid var(--twitch-border);
+}
+
+.sm-panel-title {
+  color: var(--twitch-text);
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sm-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  color: var(--twitch-text-secondary);
+  padding-left: 0;
+  font-size: 14px;
+}
+
+.sm-chat {
+  min-height: 200px;
+  display: grid;
+  gap: 8px;
+  color: var(--twitch-text);
+  background: var(--twitch-bg-tertiary);
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.sm-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.sm-input {
+  flex: 1;
+  border: 1px solid var(--twitch-border);
+  border-radius: 4px;
+  padding: 10px 12px;
+  background: var(--twitch-bg-tertiary);
+  color: var(--twitch-text);
+  font-size: 14px;
+  outline: none;
+}
+
+.sm-input:focus {
+  border-color: var(--twitch-purple);
+  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.sm-center .sm-panel {
+  height: 100%;
+}
+
+.preview-box {
+  background: var(--twitch-bg);
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid var(--twitch-border);
+}
+
+.red-screen {
+  width: 100%;
+  height: 480px;
+  background: var(--twitch-red);
+  border-radius: 4px;
+  border: 4px solid var(--twitch-bg);
+}
+
+.sm-status {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.badge-live {
+  color: var(--twitch-red);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.badge-good {
+  background: var(--twitch-green);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.badge-gifts {
+  background: var(--twitch-purple);
+  color: white;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.qa-btn {
+  background: var(--twitch-bg-tertiary);
+  color: var(--twitch-text);
+  border: 1px solid var(--twitch-border);
+  border-radius: 4px;
+  padding: 12px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.qa-btn:hover {
+  background: var(--twitch-purple);
+  border-color: var(--twitch-purple);
+  color: white;
+}
+
+.sm-bottom-controls {
+  position: sticky;
+  bottom: 0;
+  background: var(--twitch-bg-secondary);
+  border-top: 1px solid var(--twitch-border);
+  padding: 12px 16px;
+}
+
+.sm-bottom-controls .controls-inner {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ========== NOSOTROS & TERMS ========== */
+.nosotros, .tyc {
+  background: var(--twitch-bg-secondary);
+  padding: 40px;
+  border-radius: 8px;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid var(--twitch-border);
+}
+
+.nosotros h2, .tyc h2 {
+  color: var(--twitch-purple);
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  border-bottom: 2px solid var(--twitch-border);
+  padding-bottom: 16px;
+}
+
+.nosotros p, .tyc p {
+  color: var(--twitch-text);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  text-align: justify;
+  font-size: 16px;
+}
+
+.boton-volver {
+  text-align: center;
+  margin-top: 32px;
+}
+
+#btnVolver, .btn-back {
+  background: var(--twitch-purple);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#btnVolver:hover, .btn-back:hover {
+  background: var(--twitch-purple-hover);
+  transform: translateY(-1px);
+}
+
+.imagen-nosotros {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  vertical-align: middle;
+  margin-left: 12px;
+}
+
+.nosotros ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 32px;
+}
+
+.nosotros ul li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--twitch-bg-tertiary);
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--twitch-border);
+  transition: all 0.2s ease;
+}
+
+.nosotros ul li:hover {
+  background: var(--twitch-bg-secondary);
+  transform: translateX(4px);
+}
+
+.nosotros ul li strong {
+  flex: 1;
+  font-size: 16px;
+  color: var(--twitch-text);
+}
+
+.nosotros ul li img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-left: 16px;
+  border-radius: 8px;
+  border: 2px solid var(--twitch-purple);
+}
+
+footer {
+  background: var(--twitch-bg-secondary);
+  text-align: center;
+  padding: 20px 0;
+  color: var(--twitch-text-secondary);
+  font-size: 14px;
+  border-top: 1px solid var(--twitch-border);
+  margin-top: auto;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .sm-grid {
+    grid-template-columns: 280px 1fr 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navbar-right, .navbar-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .container, .container-general {
+    padding: 0 16px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  .sm-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sm-col {
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor {
+    padding: 20px;
+  }
+
+  .imagen-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .titulo-universidad {
+    font-size: 1.5rem;
+  }
+
+  .nosotros, .tyc {
+    padding: 24px;
+  }
+
+  .nosotros h2, .tyc h2 {
+    font-size: 1.5rem;
+  }
+}

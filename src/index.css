@@ -1,0 +1,67 @@
+/* Base styles - Twitch Theme */
+@import url('https://fonts.cdnfonts.com/css/robert');
+
+:root {
+  --twitch-purple: #9146FF;
+  --twitch-purple-dark: #772CE8;
+  --twitch-purple-hover: #A970FF;
+  --twitch-bg: #18181B;
+  --twitch-bg-secondary: #1F1F23;
+  --twitch-bg-tertiary: #26262C;
+  --twitch-text: #EFEFF1;
+  --twitch-text-secondary: #ADADB8;
+  --twitch-border: #3A3A3D;
+  --twitch-red: #E91916;
+  --twitch-green: #00D166;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--twitch-bg);
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  color: var(--twitch-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+  color: var(--twitch-text);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--twitch-purple);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--twitch-text);
+}
+
+button {
+  border-radius: 4px;
+  border: none;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: var(--twitch-purple);
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--twitch-purple-hover);
+  transform: translateY(-1px);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px solid var(--twitch-purple);
+  outline-offset: 2px;
+}

@@ -1,0 +1,24 @@
+/* App-specific styles - Twitch Theme */
+:root {
+  --twitch-purple: #9146FF;
+  --twitch-purple-dark: #772CE8;
+  --twitch-purple-hover: #A970FF;
+  --twitch-bg: #18181B;
+  --twitch-bg-secondary: #1F1F23;
+  --twitch-bg-tertiary: #26262C;
+  --twitch-text: #EFEFF1;
+  --twitch-text-secondary: #ADADB8;
+  --twitch-border: #3A3A3D;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--twitch-bg);
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--twitch-bg);
+}

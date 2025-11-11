@@ -1,0 +1,107 @@
+/* Perfil Espectador Page - Twitch Theme */
+.perfil-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 24px;
+  background: #18181B;
+}
+
+.perfil-card {
+  background: #1F1F23;
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3A3A3D;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.perfil-card h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #EFEFF1;
+}
+
+.perfil-card .username {
+  margin: 0 0 32px 0;
+  font-size: 16px;
+  color: #ADADB8;
+}
+
+.nivel-section h3 {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #EFEFF1;
+}
+
+.xp-bar-large {
+  width: 100%;
+  height: 32px;
+  background: #26262C;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  position: relative;
+  border: 1px solid #3A3A3D;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #9146FF 0%, #772CE8 100%);
+  border-radius: 16px;
+  transition: width 0.5s ease;
+}
+
+.xp-text {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ADADB8;
+}
+
+.simulation-controls {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.simulation-controls .btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .perfil-container {
+    padding: 16px;
+  }
+
+  .perfil-card {
+    padding: 24px;
+  }
+
+  .perfil-card h2 {
+    font-size: 1.5rem;
+  }
+
+  .nivel-section h3 {
+    font-size: 1.25rem;
+  }
+
+  .simulation-controls {
+    flex-direction: column;
+  }
+
+  .simulation-controls .btn {
+    width: 100%;
+  }
+}

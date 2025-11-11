@@ -1,0 +1,156 @@
+/* Recarga Page - Twitch Theme */
+.recarga-page {
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: #18181B;
+  color: #EFEFF1;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.recarga-page .navbar {
+  background-color: #1F1F23;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3A3A3D;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.recarga-page .navbar h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #9146FF;
+  margin: 0;
+}
+
+.recarga-page .container {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #1F1F23;
+  padding: 32px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #3A3A3D;
+}
+
+.recarga-page .form-recarga {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.recarga-page .form-recarga label {
+  display: block;
+  margin-bottom: 8px;
+  color: #EFEFF1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recarga-page .form-recarga select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 4px;
+  border: 1px solid #3A3A3D;
+  background: #26262C;
+  color: #EFEFF1;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.recarga-page .form-recarga select:focus {
+  border-color: #9146FF;
+  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+}
+
+.recarga-page .form-recarga select option {
+  background-color: #26262C;
+  color: #EFEFF1;
+}
+
+.recarga-page .btn-recargar,
+.recarga-page .btn-descargar {
+  background-color: #9146FF;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.recarga-page .btn-recargar:hover,
+.recarga-page .btn-descargar:hover {
+  background-color: #A970FF;
+  transform: translateY(-1px);
+}
+
+.recarga-page .oculto {
+  display: none;
+}
+
+.recarga-page .comprobante {
+  margin-top: 24px;
+  background-color: #26262C;
+  padding: 24px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #3A3A3D;
+}
+
+.recarga-page .comprobante h3 {
+  color: #9146FF;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+}
+
+.recarga-page .comprobante p {
+  color: #EFEFF1;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.recarga-page .btn-volver {
+  border: 1px solid #3A3A3D;
+  color: #ADADB8;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recarga-page .btn-volver:hover {
+  background: #26262C;
+  border-color: #9146FF;
+  color: #9146FF;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .recarga-page .container {
+    margin: 20px 12px;
+    padding: 24px;
+  }
+
+  .recarga-page .navbar {
+    padding: 12px 16px;
+  }
+
+  .recarga-page .navbar h1 {
+    font-size: 1.25rem;
+  }
+}
