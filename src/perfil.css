@@ -1,4 +1,4 @@
-/* Perfil Espectador Page - Twitch Theme */
+/* Página de Perfil de Espectador - Tema Twitch */
 .perfil-container {
   display: flex;
   justify-content: center;
@@ -79,7 +79,7 @@
   font-weight: 600;
 }
 
-/* Responsive - Mobile Portrait */
+/* Diseño Responsive - Móvil Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
   .perfil-container {
     padding: 16px 12px;
@@ -129,7 +129,7 @@
   }
 }
 
-/* Extra small mobile devices */
+/* Dispositivos móviles extra pequeños */
 @media (max-width: 360px) and (orientation: portrait) {
   .perfil-container {
     padding: 12px 8px;

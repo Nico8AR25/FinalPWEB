@@ -1,4 +1,4 @@
-/* Recarga Page - Twitch Theme */
+/* Página de Recarga - Tema Twitch */
 .recarga-page {
   font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   background-color: #18181B;
@@ -140,7 +140,7 @@
   color: #9146FF;
 }
 
-/* Responsive - Mobile Portrait */
+/* Diseño Responsive - Móvil Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
   .recarga-page {
     min-height: 100vh;
@@ -180,7 +180,7 @@
   }
 
   .recarga-page .form-recarga select {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Previene zoom en iOS */
     padding: 14px 16px;
   }
 
@@ -214,7 +214,7 @@
   }
 }
 
-/* Extra small mobile devices */
+/* Dispositivos móviles extra pequeños */
 @media (max-width: 360px) and (orientation: portrait) {
   .recarga-page .navbar h1 {
     font-size: 1.1rem;

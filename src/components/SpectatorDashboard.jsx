@@ -11,7 +11,7 @@ React.useEffect(() => {
   setMonedas(user?.monedas ?? 0);
 }, [user?.monedas]);
   const manejarBusqueda = () => {
-    console.log('Buscando:', consultaBusqueda);
+    // Buscando: consultaBusqueda
   };
 
   return (

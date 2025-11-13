@@ -1,4 +1,4 @@
-/* Registro Page - Twitch Theme */
+/* Página de Registro - Tema Twitch */
 body {
   margin: 0;
   min-height: 100vh;
@@ -170,7 +170,7 @@ footer {
   border-top: 1px solid #3A3A3D;
 }
 
-/* Registro Page Container */
+/* Contenedor de Página de Registro */
 .registro-page {
   min-height: 100vh;
   background: #232326;
@@ -274,7 +274,7 @@ footer {
   font-size: 13px;
 }
 
-/* Responsive - Mobile Portrait */
+/* Diseño Responsive - Móvil Portrait */
 @media (max-width: 480px) and (orientation: portrait) {
   .registro-page {
     min-height: 100vh;
@@ -318,7 +318,7 @@ footer {
 
   .form-group input,
   .form-group select {
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Previene zoom en iOS */
     padding: 14px 16px;
   }
 
@@ -357,7 +357,7 @@ footer {
   }
 }
 
-/* Extra small mobile devices */
+/* Dispositivos móviles extra pequeños */
 @media (max-width: 360px) and (orientation: portrait) {
   .registro-header h1 {
     font-size: 1.25rem;

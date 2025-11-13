@@ -1,4 +1,4 @@
-/* ========== TWITCH-INSPIRED STYLES ========== */
+/* ========== ESTILOS INSPIRADOS EN TWITCH ========== */
 @import url('https://fonts.cdnfonts.com/css/robert');
 
 /* Colores principales de Twitch */
@@ -47,7 +47,7 @@ a:hover {
   color: var(--twitch-purple);
 }
 
-/* ========== NAVBAR STYLES (Sticky como Twitch) ========== */
+/* ========== ESTILOS DE NAVBAR (Sticky como Twitch) ========== */
 header.navbar {
   background-color: var(--twitch-bg-secondary);
   padding: 0;
@@ -81,7 +81,7 @@ header.navbar {
   flex-wrap: wrap;
 }
 
-/* ========== BUTTONS (Estilo Twitch) ========== */
+/* ========== BOTONES (Estilo Twitch) ========== */
 .btn, .perfil-button, .logout-button {
   padding: 8px 16px;
   border: none;
@@ -161,7 +161,7 @@ header.navbar {
   color: var(--twitch-text);
 }
 
-/* ========== PAGE WRAPPER ========== */
+/* ========== CONTENEDOR DE PÁGINA ========== */
 .page-wrapper {
   background-color: var(--twitch-bg);
   min-height: 100vh;
@@ -176,7 +176,7 @@ header.navbar {
   background-color: var(--twitch-bg);
 }
 
-/* ========== LOGIN PAGE ========== */
+/* ========== PÁGINA DE INICIO DE SESIÓN ========== */
 .login-center {
   min-height: 100vh;
   width: 100%;
@@ -306,7 +306,7 @@ header.navbar {
   margin: 0;
 }
 
-/* Login Error and Link Styles */
+/* Estilos de Error y Enlaces de Inicio de Sesión */
 .login-error {
   color: #fd1919bb;
   text-align: right;
@@ -324,7 +324,7 @@ header.navbar {
   font-size: 15px;
 }
 
-/* ========== MAIN CONTENT ========== */
+/* ========== CONTENIDO PRINCIPAL ========== */
 .main-content {
   flex: 1;
   display: flex;
@@ -335,7 +335,7 @@ header.navbar {
   min-height: calc(100vh - 80px);
 }
 
-/* ========== CONTAINER STYLES ========== */
+/* ========== ESTILOS DE CONTENEDORES ========== */
 .container, .container-general {
   max-width: 1200px;
   margin: 2rem auto;
@@ -428,7 +428,7 @@ header.navbar {
   border: 1px solid var(--twitch-border);
 }
 
-/* ========== GIFTS PANEL ========== */
+/* ========== PANEL DE REGALOS ========== */
 .gifts-panel {
   margin-top: 24px;
   padding: 24px;
@@ -493,7 +493,7 @@ header.navbar {
   text-align: center;
 }
 
-/* ========== SPECTATOR DASHBOARD ========== */
+/* ========== TABLERO DE ESPECTADOR ========== */
 .welcome-section {
   background: var(--twitch-bg-secondary);
   border-radius: 8px;
@@ -657,7 +657,7 @@ header.navbar {
   font-size: 1.5rem;
 }
 
-/* Gift Shop Styles */
+/* Estilos de Tienda de Regalos */
 .gift-item {
   background: rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
@@ -695,7 +695,7 @@ header.navbar {
   margin-top: 2rem;
 }
 
-/* Notification Modal */
+/* Modal de Notificación */
 .notification-modal {
   position: fixed;
   top: 0;
@@ -739,7 +739,7 @@ header.navbar {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Spectator Dashboard Styles */
+/* Estilos del Tablero de Espectador */
 .perfil-button-margin {
   margin-left: 8px;
 }
@@ -748,7 +748,7 @@ header.navbar {
   color: #ccc;
 }
 
-/* Streamer Dashboard Styles */
+/* Estilos del Tablero de Streamer */
 .navbar-greeting {
   margin-right: 16px;
 }
@@ -757,29 +757,33 @@ header.navbar {
   margin-right: 16px;
 }
 
-/* ========== STREAM PREVIEW (Manager) ========== */
+/* ========== VISTA PREVIA DE TRANSMISIÓN (Administrador) - Estilo Twitch ========== */
 .sm-topbar {
   background: var(--twitch-bg-secondary);
   color: var(--twitch-text);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
+  padding: 12px 20px;
   border-bottom: 1px solid var(--twitch-border);
   position: sticky;
   top: 0;
   z-index: 999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .sm-title {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: var(--twitch-text);
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.2px;
 }
 
 .sm-metrics {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
 }
 
@@ -787,12 +791,14 @@ header.navbar {
   background: var(--twitch-bg-tertiary);
   color: var(--twitch-text);
   border: 1px solid var(--twitch-border);
-  padding: 8px 16px;
+  padding: 6px 12px;
   border-radius: 4px;
-  font-size: 14px;
-  min-width: 100px;
+  font-size: 13px;
+  min-width: auto;
   text-align: center;
   font-weight: 600;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  white-space: nowrap;
 }
 
 .metric-center {
@@ -807,11 +813,12 @@ header.navbar {
   gap: 16px;
   padding: 16px;
   background: var(--twitch-bg);
+  min-height: calc(100vh - 120px);
 }
 
 .sm-col {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   grid-template-rows: 1fr 1fr;
 }
 
@@ -822,119 +829,201 @@ header.navbar {
 .grow {
   height: 100%;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .sm-panel {
   background: var(--twitch-bg-secondary);
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 4px;
+  padding: 14px;
   border: 1px solid var(--twitch-border);
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .sm-panel-title {
   color: var(--twitch-text);
-  margin: 0 0 12px 0;
-  font-size: 16px;
+  margin: 0 0 10px 0;
+  font-size: 14px;
   font-weight: 700;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.1px;
+  text-transform: uppercase;
 }
 
 .sm-list {
   list-style: none;
   display: grid;
-  gap: 8px;
+  gap: 6px;
   color: var(--twitch-text-secondary);
   padding-left: 0;
-  font-size: 14px;
+  font-size: 13px;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.4;
+}
+
+.sm-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(58, 58, 61, 0.3);
+}
+
+.sm-list li:last-child {
+  border-bottom: none;
 }
 
 .sm-chat {
   min-height: 200px;
-  display: grid;
-  gap: 8px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   color: var(--twitch-text);
-  background: var(--twitch-bg-tertiary);
-  padding: 12px;
+  background: var(--twitch-bg);
+  padding: 10px;
   border-radius: 4px;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.4;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sm-chat > div {
+  padding: 4px 0;
+  word-wrap: break-word;
 }
 
 .sm-input-row {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .sm-input {
   flex: 1;
   border: 1px solid var(--twitch-border);
   border-radius: 4px;
-  padding: 10px 12px;
+  padding: 8px 12px;
   background: var(--twitch-bg-tertiary);
   color: var(--twitch-text);
-  font-size: 14px;
+  font-size: 13px;
   outline: none;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: border-color 0.15s ease;
+}
+
+.sm-input::placeholder {
+  color: var(--twitch-text-secondary);
 }
 
 .sm-input:focus {
   border-color: var(--twitch-purple);
-  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(145, 70, 255, 0.15);
 }
 
 .sm-center .sm-panel {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .preview-box {
   background: var(--twitch-bg);
-  border-radius: 8px;
-  padding: 12px;
-  border: 1px solid var(--twitch-border);
+  border-radius: 4px;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 .red-screen {
   width: 100%;
-  height: 480px;
+  height: 100%;
   background: var(--twitch-red);
+  border-radius: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  position: relative;
+}
+
+.red-screen::before {
+  content: 'EN VIVO';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(233, 25, 22, 0.9);
+  color: white;
+  padding: 4px 8px;
   border-radius: 4px;
-  border: 4px solid var(--twitch-bg);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .sm-status {
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 10px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .badge-live {
   color: var(--twitch-red);
   font-weight: 700;
-  font-size: 14px;
+  font-size: 12px;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-live::before {
+  content: '●';
+  font-size: 10px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .badge-good {
   background: var(--twitch-green);
   color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
   font-weight: 600;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.3px;
 }
 
 .badge-gifts {
   background: var(--twitch-purple);
   color: white;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 4px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
   font-weight: 600;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .qa-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }
 
 .qa-btn {
@@ -942,16 +1031,25 @@ header.navbar {
   color: var(--twitch-text);
   border: 1px solid var(--twitch-border);
   border-radius: 4px;
-  padding: 12px 8px;
+  padding: 10px 8px;
   cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s ease;
+  font-size: 12px;
+  transition: all 0.15s ease;
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
 }
 
 .qa-btn:hover {
   background: var(--twitch-purple);
   border-color: var(--twitch-purple);
   color: white;
+  transform: translateY(-1px);
+}
+
+.qa-btn:active {
+  transform: translateY(0);
 }
 
 .sm-bottom-controls {
@@ -960,15 +1058,25 @@ header.navbar {
   background: var(--twitch-bg-secondary);
   border-top: 1px solid var(--twitch-border);
   padding: 12px 16px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .sm-bottom-controls .controls-inner {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* ========== NOSOTROS & TERMS ========== */
+.sm-bottom-controls .btn {
+  font-family: 'Roobert', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px 16px;
+  min-height: 40px;
+}
+
+/* ========== NOSOTROS Y TÉRMINOS ========== */
 .nosotros, .tyc {
   background: var(--twitch-bg-secondary);
   padding: 40px;
@@ -1075,7 +1183,7 @@ footer {
   margin-top: auto;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== DISEÑO RESPONSIVE ========== */
 @media (max-width: 1024px) {
   .sm-grid {
     grid-template-columns: 280px 1fr 300px;
@@ -1111,15 +1219,15 @@ footer {
   }
 }
 
-/* Mobile Portrait - Optimized for readability and space */
+/* Móvil Portrait - Optimizado para legibilidad y espacio */
 @media (max-width: 480px) and (orientation: portrait) {
-  /* Base typography improvements */
+  /* Mejoras de tipografía base */
   body {
     font-size: 16px;
     line-height: 1.5;
   }
 
-  /* Navbar mobile optimization */
+  /* Optimización de navbar móvil */
   header.navbar {
     padding: 0;
   }
@@ -1150,7 +1258,7 @@ footer {
     font-size: 13px;
   }
 
-  /* Buttons - Touch-friendly minimum size */
+  /* Botones - Tamaño mínimo táctil */
   .btn, .perfil-button, .logout-button {
     padding: 10px 16px;
     font-size: 14px;
@@ -1167,7 +1275,7 @@ footer {
     font-size: 12px;
   }
 
-  /* Login page */
+  /* Página de inicio de sesión */
   .contenedor {
     padding: 16px;
     max-width: 100%;
@@ -1195,7 +1303,7 @@ footer {
 
   .grupo-formulario input {
     padding: 14px 16px;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Previene zoom en iOS */
   }
 
   .boton-login {
@@ -1219,7 +1327,7 @@ footer {
     font-size: 14px;
   }
 
-  /* Main containers */
+  /* Contenedores principales */
   .container, .container-general {
     padding: 0 12px;
     margin: 1rem auto;
@@ -1235,7 +1343,7 @@ footer {
     margin-bottom: 20px;
   }
 
-  /* Welcome section */
+  /* Sección de bienvenida */
   .welcome-section {
     padding: 20px 16px;
     margin-bottom: 16px;
@@ -1273,7 +1381,7 @@ footer {
     font-size: 14px;
   }
 
-  /* Search section */
+  /* Sección de búsqueda */
   .search-section {
     padding: 16px;
     margin-bottom: 16px;
@@ -1286,7 +1394,7 @@ footer {
 
   .search-input {
     padding: 12px 14px;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px; /* Previene zoom en iOS */
   }
 
   .search-button, .view-streams-btn {
@@ -1295,7 +1403,7 @@ footer {
     min-height: 44px;
   }
 
-  /* Gifts section */
+  /* Sección de regalos */
   .gifts-section {
     padding: 16px;
     margin-bottom: 16px;
@@ -1341,7 +1449,7 @@ footer {
     padding: 20px;
   }
 
-  /* Control buttons */
+  /* Botones de control */
   .control-buttons {
     gap: 8px;
     margin: 16px 0;
@@ -1352,7 +1460,7 @@ footer {
     width: 100%;
   }
 
-  /* Progress container */
+  /* Contenedor de progreso */
   .progress-container {
     padding: 16px;
     margin: 16px 0;
@@ -1371,14 +1479,14 @@ footer {
     font-size: 13px;
   }
 
-  /* Metric boxes */
+  /* Cajas de métricas */
   .metric {
     padding: 16px;
     font-size: 14px;
     margin: 12px 0;
   }
 
-  /* Gifts panel */
+  /* Panel de regalos */
   .gifts-panel {
     padding: 16px;
     margin-top: 16px;
@@ -1409,7 +1517,7 @@ footer {
     font-size: 13px;
   }
 
-  /* Navigation */
+  /* Navegación */
   .navegacion-principal {
     margin-bottom: 20px;
   }
@@ -1423,13 +1531,13 @@ footer {
     font-size: 13px;
   }
 
-  /* Footer */
+  /* Pie de página */
   .pie-pagina {
     font-size: 11px;
     margin-top: 20px;
   }
 
-  /* Nosotros & Terms */
+  /* Nosotros y Términos */
   .nosotros, .tyc {
     padding: 20px 16px;
     margin: 16px;
@@ -1466,7 +1574,7 @@ footer {
     margin-top: 8px;
   }
 
-  /* Back button */
+  /* Botón de regreso */
   .btn-back {
     padding: 12px 20px;
     font-size: 14px;
@@ -1474,7 +1582,7 @@ footer {
     max-width: 300px;
   }
 
-  /* Notification modal */
+  /* Modal de notificación */
   .notification-modal {
     padding: 16px;
   }
@@ -1495,9 +1603,126 @@ footer {
     width: 100%;
     max-width: 200px;
   }
+
+  /* Vista Previa de Transmisión Móvil */
+  .sm-topbar {
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sm-title {
+    font-size: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sm-metrics {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .metric-badge {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+
+  .sm-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .sm-col {
+    grid-template-rows: auto auto;
+    gap: 12px;
+  }
+
+  .fill-col {
+    height: auto;
+  }
+
+  .sm-panel {
+    padding: 12px;
+  }
+
+  .sm-panel-title {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .sm-list {
+    font-size: 12px;
+    gap: 4px;
+  }
+
+  .sm-chat {
+    min-height: 150px;
+    max-height: 200px;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .sm-input {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .preview-box {
+    aspect-ratio: 16 / 9;
+  }
+
+  .red-screen {
+    font-size: 12px;
+  }
+
+  .red-screen::before {
+    font-size: 10px;
+    padding: 3px 6px;
+    top: 6px;
+    left: 6px;
+  }
+
+  .sm-status {
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .badge-live,
+  .badge-good,
+  .badge-gifts {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .qa-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .qa-btn {
+    font-size: 11px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .sm-bottom-controls {
+    padding: 10px 12px;
+  }
+
+  .sm-bottom-controls .controls-inner {
+    gap: 8px;
+    flex-direction: column;
+  }
+
+  .sm-bottom-controls .btn {
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 16px;
+  }
 }
 
-/* Extra small mobile devices */
+/* Dispositivos móviles extra pequeños */
 @media (max-width: 360px) and (orientation: portrait) {
   .navbar-brand h1 {
     font-size: 1.1rem;

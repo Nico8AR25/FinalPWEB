@@ -35,7 +35,7 @@ export default function StreamPreview({ onEndStream, onGift }) {
   // Simuladores
   const simularChat = () => {
     const valor = referenciaInput.current?.value?.trim();
-    const mensaje = valor && valor.length ? valor : `usuario${Math.floor(Math.random()*100)}: ¡Hola!`;
+    const mensaje = valor && valor.length ? valor : `Usuario${Math.floor(Math.random()*100)}: ¡Hola!`;
     setChat((c) => [...c, mensaje]);
     if (referenciaInput.current) referenciaInput.current.value = '';
   };
@@ -91,7 +91,7 @@ export default function StreamPreview({ onEndStream, onGift }) {
             </div>
             <div className="sm-input-row">
               <input ref={referenciaInput} className="sm-input" placeholder="Enviar mensaje" />
-              <button className="btn btn-primary" onClick={simularChat}>Chat</button>
+              <button className="btn btn-primary" onClick={simularChat}>Enviar</button>
             </div>
           </section>
         </aside>
@@ -105,7 +105,7 @@ export default function StreamPreview({ onEndStream, onGift }) {
               <div className="red-screen" />
             </div>
             <div className="sm-status">
-              <span className="badge-live">● EN VIVO</span>
+              <span className="badge-live">EN VIVO</span>
               <span className="badge-good">BUENO</span>
               <span className="badge-gifts">🎁 {contadorRegalos}</span>
             </div>
