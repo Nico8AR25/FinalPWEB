@@ -27,7 +27,7 @@ React.useEffect(() => {
           </div>
 
           <span className="monedas">Monedas: <span id="monedas">{monedas}</span></span>
-          <Link to="/recarga" target="_blank" className="perfil-button" style={{ marginLeft: '8px' }}>Recargar Monedas</Link>
+          <Link to="/recarga" target="_blank" className="perfil-button perfil-button-margin">Recargar Monedas</Link>
           <Link to="/perfil" className="perfil-button">Perfil</Link>
           <button className="logout-button" onClick={onLogout}>Cerrar sesión</button>
         </div>
@@ -77,7 +77,7 @@ React.useEffect(() => {
         <div className="purchased-gifts-section">
           <h3>Mis Regalos Comprados</h3>
           <div id="purchased-gifts-list" className="gifts-grid">
-            <p style={{color: '#ccc'}}>No has comprado ningún regalo aún</p>
+            <p className="purchased-gifts-empty">No has comprado ningún regalo aún</p>
           </div>
         </div>
       </main>

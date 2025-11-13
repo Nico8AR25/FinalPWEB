@@ -306,6 +306,24 @@ header.navbar {
   margin: 0;
 }
 
+/* Login Error and Link Styles */
+.login-error {
+  color: #fd1919bb;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.login-link-container {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.login-link {
+  color: #ccc;
+  text-decoration: underline;
+  font-size: 15px;
+}
+
 /* ========== MAIN CONTENT ========== */
 .main-content {
   flex: 1;
@@ -637,6 +655,106 @@ header.navbar {
   color: var(--twitch-text);
   margin-bottom: 16px;
   font-size: 1.5rem;
+}
+
+/* Gift Shop Styles */
+.gift-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.gift-emoji {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.gift-name {
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.gift-cost {
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.gift-points {
+  color: #aaf;
+  margin-bottom: 1rem;
+}
+
+.gift-button-full {
+  width: 100%;
+}
+
+.back-section {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Notification Modal */
+.notification-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.notification-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 400px;
+  text-align: center;
+  color: #333;
+}
+
+.notification-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.notification-close {
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notification-close:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Spectator Dashboard Styles */
+.perfil-button-margin {
+  margin-left: 8px;
+}
+
+.purchased-gifts-empty {
+  color: #ccc;
+}
+
+/* Streamer Dashboard Styles */
+.navbar-greeting {
+  margin-right: 16px;
+}
+
+.navbar-level {
+  margin-right: 16px;
 }
 
 /* ========== STREAM PREVIEW (Manager) ========== */
@@ -993,25 +1111,412 @@ footer {
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Portrait - Optimized for readability and space */
+@media (max-width: 480px) and (orientation: portrait) {
+  /* Base typography improvements */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Navbar mobile optimization */
+  header.navbar {
+    padding: 0;
+  }
+
+  .navbar-brand {
+    padding: 10px 16px;
+  }
+
+  .navbar-brand h1 {
+    font-size: 1.25rem;
+  }
+
+  .navbar-right, .navbar-actions {
+    padding: 10px 16px;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-right > *,
+  .navbar-actions > * {
+    font-size: 13px;
+  }
+
+  .navbar-greeting,
+  .navbar-level {
+    margin-right: 8px;
+    font-size: 13px;
+  }
+
+  /* Buttons - Touch-friendly minimum size */
+  .btn, .perfil-button, .logout-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .monedas {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .xp-header {
+    font-size: 12px;
+  }
+
+  /* Login page */
   .contenedor {
-    padding: 20px;
+    padding: 16px;
+    max-width: 100%;
   }
 
   .imagen-logo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
   }
 
   .titulo-universidad {
     font-size: 1.5rem;
+    margin-bottom: 24px;
   }
 
+  .formulario-login {
+    gap: 20px;
+  }
+
+  .grupo-formulario label {
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .grupo-formulario input {
+    padding: 14px 16px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .boton-login {
+    padding: 14px 24px;
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .login-error {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .login-link-container {
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .login-link {
+    font-size: 14px;
+  }
+
+  /* Main containers */
+  .container, .container-general {
+    padding: 0 12px;
+    margin: 1rem auto;
+  }
+
+  .card {
+    padding: 20px 16px;
+    margin-bottom: 16px;
+  }
+
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  /* Welcome section */
+  .welcome-section {
+    padding: 20px 16px;
+    margin-bottom: 16px;
+  }
+
+  .welcome-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .user-role {
+    font-size: 14px;
+  }
+
+  .user-level-info {
+    padding: 16px;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .level-badge {
+    padding: 10px 16px;
+    min-width: auto;
+  }
+
+  .level-text {
+    font-size: 11px;
+  }
+
+  .level-number {
+    font-size: 1.25rem;
+  }
+
+  .points-info {
+    font-size: 14px;
+  }
+
+  /* Search section */
+  .search-section {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .search-container {
+    max-width: 100%;
+    gap: 6px;
+  }
+
+  .search-input {
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .search-button, .view-streams-btn {
+    padding: 12px 20px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+
+  /* Gifts section */
+  .gifts-section {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .gifts-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+
+  .gifts-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .gift-item {
+    padding: 16px;
+  }
+
+  .gift-emoji {
+    font-size: 2.5rem;
+  }
+
+  .gift-name {
+    font-size: 1rem;
+  }
+
+  .gift-cost, .gift-points {
+    font-size: 14px;
+  }
+
+  .purchased-gifts-section {
+    padding: 16px;
+  }
+
+  .purchased-gifts-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+  }
+
+  .purchased-gifts-empty {
+    font-size: 14px;
+    padding: 20px;
+  }
+
+  /* Control buttons */
+  .control-buttons {
+    gap: 8px;
+    margin: 16px 0;
+    flex-direction: column;
+  }
+
+  .control-buttons .btn {
+    width: 100%;
+  }
+
+  /* Progress container */
+  .progress-container {
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .progress-label {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .progress {
+    height: 20px;
+  }
+
+  .progress-text {
+    font-size: 13px;
+  }
+
+  /* Metric boxes */
+  .metric {
+    padding: 16px;
+    font-size: 14px;
+    margin: 12px 0;
+  }
+
+  /* Gifts panel */
+  .gifts-panel {
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .gifts-title {
+    font-size: 1.25rem;
+  }
+
+  .gifts-subtitle {
+    font-size: 13px;
+  }
+
+  .gift-stats {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 12px;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-label {
+    font-size: 13px;
+  }
+
+  /* Navigation */
+  .navegacion-principal {
+    margin-bottom: 20px;
+  }
+
+  .enlaces-navegacion {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .enlaces-navegacion a {
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .pie-pagina {
+    font-size: 11px;
+    margin-top: 20px;
+  }
+
+  /* Nosotros & Terms */
   .nosotros, .tyc {
-    padding: 24px;
+    padding: 20px 16px;
+    margin: 16px;
   }
 
   .nosotros h2, .tyc h2 {
     font-size: 1.5rem;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+  }
+
+  .nosotros p, .tyc p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .nosotros ul li {
+    padding: 12px;
+    margin-bottom: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nosotros ul li strong {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .nosotros ul li img {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  /* Back button */
+  .btn-back {
+    padding: 12px 20px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Notification modal */
+  .notification-modal {
+    padding: 16px;
+  }
+
+  .notification-content {
+    padding: 20px 16px;
+    max-width: calc(100% - 32px);
+  }
+
+  .notification-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  .notification-close {
+    padding: 12px 24px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 360px) and (orientation: portrait) {
+  .navbar-brand h1 {
+    font-size: 1.1rem;
+  }
+
+  .titulo-universidad {
+    font-size: 1.25rem;
+  }
+
+  .card h2,
+  .welcome-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .container, .container-general {
+    padding: 0 8px;
+  }
+
+  .card {
+    padding: 16px 12px;
   }
 }

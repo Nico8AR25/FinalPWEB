@@ -59,9 +59,9 @@ const Login = ({ onLogin }) => {
           />
         </div>
         <button type="submit" className="boton-login">Iniciar sesión</button>
-        {error && <div style={{ color: "#fd1919bb", textAlign: "right", marginTop: 10 }}>{error}</div>}
-        <div style={{ textAlign: "right", marginTop: "10px" }}>
-          <Link to="/registro" style={{ color: "#ccc", textDecoration: "underline", fontSize: "15px" }}>¿No estás registrado?</Link>
+        {error && <div className="login-error">{error}</div>}
+        <div className="login-link-container">
+          <Link to="/registro" className="login-link">¿No estás registrado?</Link>
         </div>
       </form>
 

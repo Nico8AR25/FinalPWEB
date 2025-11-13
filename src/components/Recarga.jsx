@@ -59,7 +59,7 @@ export default function Recarga({ onRecharge }) {
           <div className="comprobante">
             <h3>✅ Recarga Exitosa</h3>
             <p>Gracias por tu compra.</p>
-            <p style={{ whiteSpace:'pre-line' }}>{detalle}</p>
+            <p>{detalle}</p>
             <button className="btn-descargar" onClick={descargar}>Descargar comprobante</button>
           </div>
         )}

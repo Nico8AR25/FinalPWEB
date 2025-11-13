@@ -74,34 +74,84 @@
 
 .simulation-controls .btn {
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
+/* Responsive - Mobile Portrait */
+@media (max-width: 480px) and (orientation: portrait) {
   .perfil-container {
-    padding: 16px;
+    padding: 16px 12px;
+    min-height: calc(100vh - 60px);
   }
 
   .perfil-card {
-    padding: 24px;
+    padding: 24px 16px;
+    max-width: 100%;
   }
 
   .perfil-card h2 {
     font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+
+  .perfil-card .username {
+    font-size: 15px;
+    margin-bottom: 24px;
   }
 
   .nivel-section h3 {
     font-size: 1.25rem;
+    margin-bottom: 20px;
+  }
+
+  .xp-bar-large {
+    height: 28px;
+    margin-bottom: 12px;
+  }
+
+  .xp-text {
+    font-size: 14px;
   }
 
   .simulation-controls {
     flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
   }
 
   .simulation-controls .btn {
     width: 100%;
+    padding: 12px 20px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 360px) and (orientation: portrait) {
+  .perfil-container {
+    padding: 12px 8px;
+  }
+
+  .perfil-card {
+    padding: 20px 12px;
+  }
+
+  .perfil-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .nivel-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .xp-bar-large {
+    height: 24px;
+  }
+
+  .xp-text {
+    font-size: 13px;
   }
 }

@@ -63,13 +63,13 @@ export default function Registro() {
   }
 
   return (
-    <div style={{ minHeight: "100vh", background: "#232326", display: "flex", flexDirection: "column" }}>
-      <header style={{ width: "100%", background: "#18181a", borderBottom: "1px solid #444", padding: "18px 0", textAlign: "center" }}>
-        <h1 style={{ color: "#fd1919bb", fontWeight: "bold", fontSize: "2rem", letterSpacing: "1px", margin: 0 }}>StreamBoost</h1>
+    <div className="registro-page">
+      <header className="registro-header">
+        <h1>StreamBoost</h1>
       </header>
-      <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <section className="form-section" style={{ margin: "auto", background: "#2c2c2c", borderRadius: "12px", boxShadow: "0 0 20px rgba(0,0,0,0.4)", minWidth: 350, maxWidth: 420 }}>
-          <h2 style={{ color: "#fd1919bb", textAlign: "center", marginBottom: 25, fontSize: 28, borderBottom: "1px solid #555", paddingBottom: 10 }}>Crear cuenta</h2>
+      <div className="registro-main">
+        <section className="form-section registro-form-section">
+          <h2>Crear cuenta</h2>
           <form id="registerForm" onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="nombre">Nombre completo:</label>
@@ -93,17 +93,17 @@ export default function Registro() {
             </div>
             <button type="submit">Registrarme</button>
           </form>
-          {error && <div style={{ color: "#fd1919bb", textAlign: "center", marginBottom: 10 }}>{error}</div>}
-          {success && <div style={{ color: "#2ecc40", textAlign: "center", marginBottom: 10 }}>{success}</div>}
-          <div className="boton-secundario" style={{ textAlign: "center", marginTop: 15 }}>
-            <button type="button" style={{ background: "transparent", border: "1px solid #888", color: "#888", padding: "10px 20px", fontSize: "14px", borderRadius: "5px", marginBottom: 8 }} onClick={() => navigate("/")}>¿Ya tienes cuenta? Inicia sesión</button>
+          {error && <div className="registro-error">{error}</div>}
+          {success && <div className="registro-success">{success}</div>}
+          <div className="registro-boton-secundario">
+            <button type="button" onClick={() => navigate("/")}>¿Ya tienes cuenta? Inicia sesión</button>
           </div>
-          <div className="boton-volver" style={{ textAlign: "center", marginTop: 5 }}>
-            <button type="button" style={{ background: "transparent", border: "1px solid #888", color: "#888", padding: "10px 20px", fontSize: "14px", borderRadius: "5px" }} onClick={() => navigate("/")}>← Regresar</button>
+          <div className="registro-boton-volver">
+            <button type="button" onClick={() => navigate("/")}>← Regresar</button>
           </div>
         </section>
       </div>
-      <footer style={{ width: "100%", background: "#18181a", borderTop: "1px solid #444", textAlign: "center", padding: "18px 0", color: "#888", fontSize: "13px" }}>
+      <footer className="registro-footer">
         © 2025 StreamBoost Inc. Todos los derechos reservados.
       </footer>
     </div>

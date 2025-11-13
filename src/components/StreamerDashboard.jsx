@@ -61,8 +61,8 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
           <h1>StreamBoost</h1>
         </div>
         <div className="navbar-actions">
-          <span style={{marginRight: '16px'}}>Hola, {user?.nombre || user?.username || 'streamer'}</span>
-          <span style={{marginRight: '16px'}}>Nivel: {user?.nivel ?? 1}</span>
+          <span className="navbar-greeting">Hola, {user?.nombre || user?.username || 'streamer'}</span>
+          <span className="navbar-level">Nivel: {user?.nivel ?? 1}</span>
           <button onClick={onLogout} className="btn btn-outline">Cerrar sesión</button>
         </div>
       </header>
@@ -111,7 +111,7 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
             <div className="progress">
               <div 
                 id="hoursProgress" 
-                className="progress-bar" 
+                className="progress-bar"
                 style={{ width: `${progreso}%` }}
               ></div>
             </div>

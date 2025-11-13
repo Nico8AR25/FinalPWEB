@@ -40,18 +40,16 @@ export default function PerfilEspectador({ coins = 0, level = 1, xp = 0, maxXp =
             <p className="xp-text">XP: {xp} / {maxXp}</p>
             
             {/* Botones de simulación */}
-            <div className="simulation-controls" style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center' }}>
+            <div className="simulation-controls">
               <button 
                 className="btn btn-primary" 
                 onClick={() => onAddXp?.(10)}
-                style={{ padding: '10px 20px', borderRadius: '8px' }}
               >
                 +10 XP
               </button>
               <button 
                 className="btn btn-primary" 
                 onClick={onLevelUp}
-                style={{ padding: '10px 20px', borderRadius: '8px' }}
               >
                 Subir Nivel
               </button>
