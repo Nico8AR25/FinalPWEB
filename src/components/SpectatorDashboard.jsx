@@ -3,13 +3,22 @@ import { Link } from 'react-router-dom';
 
 const SpectatorDashboard = ({ onLogout, user }) => {
   const [consultaBusqueda, setConsultaBusqueda] = useState('');
-const [monedas, setMonedas] = useState(user?.monedas ?? 0);
-const nivel = user?.nivel ?? 1;
-const puntos = user?.puntos ?? 0;
+  const [monedas, setMonedas] = useState(user?.monedas ?? 0);
+  const nivel = user?.nivel ?? 1;
+  const puntos = user?.puntos ?? 0;
 
-React.useEffect(() => {
-  setMonedas(user?.monedas ?? 0);
-}, [user?.monedas]);
+  // Lista de videos locales (pon tus mp4 en /public/videos)
+  const videos = [
+    "/videos/video1.mp4",
+    "/videos/video2.mp4",
+    "/videos/video3.mp4",
+    "/videos/video4.mp4",
+  ];
+
+  React.useEffect(() => {
+    setMonedas(user?.monedas ?? 0);
+  }, [user?.monedas]);
+
   const manejarBusqueda = () => {
     // Buscando: consultaBusqueda
   };
@@ -62,10 +71,88 @@ React.useEffect(() => {
             />
             <button className="search-button" onClick={manejarBusqueda}>🔍</button>
           </div>
-          <button className="view-streams-btn">📺 Ver Streams</button>
+
+          {/* 🔴 BOTÓN ELIMINADO */}
+          {/* <button className="view-streams-btn">📺 Ver Streams</button> */}
         </div>
 
-        {/* Sección de Tienda de Regalos (enlace) */}
+        {/* ⭐⭐⭐ GALERÍA DE VIDEOS CON ESTILO TWITCH ⭐⭐⭐ */}
+<div className="videos-section">
+  <h3>📺 Streams Disponibles</h3>
+
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+      gap: "20px",
+      marginTop: "20px",
+    }}
+  >
+    {videos.map((src, i) => (
+      <div
+        key={i}
+        style={{
+          position: "relative",
+          width: "100%",
+          borderRadius: "10px",
+          overflow: "hidden",
+          backgroundColor: "#000",
+        }}
+      >
+        {/* 🔴 ETIQUETA EN VIVO */}
+        <div
+          style={{
+            position: "absolute",
+            top: "8px",
+            left: "8px",
+            backgroundColor: "red",
+            color: "white",
+            padding: "3px 8px",
+            fontSize: "12px",
+            fontWeight: "bold",
+            borderRadius: "4px",
+            zIndex: 10,
+          }}
+        >
+          EN VIVO
+        </div>
+
+        {/* 👁️ CONTADOR DE ESPECTADORES */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "15px",
+            left: "8px",
+            backgroundColor: "rgba(0,0,0,0.7)",
+            color: "white",
+            padding: "4px 8px",
+            fontSize: "13px",
+            borderRadius: "4px",
+            zIndex: 10,
+          }}
+        >
+          {Math.floor(Math.random() * 900 + 100)} espectadores
+        </div>
+
+        {/* 🎥 EL VIDEO */}
+        <video
+          src={src}
+          controls
+          style={{
+            width: "100%",
+            height: "200px",
+            objectFit: "cover",
+          }}
+        />
+      </div>
+    ))}
+  </div>
+</div>
+
+        
+        
+
+        {/* Sección de Tienda de Regalos */}
         <div className="gifts-section">
           <Link to="/tienda-regalos" className="gifts-link">
             <h3>🎁 Tienda de Regalos</h3>
