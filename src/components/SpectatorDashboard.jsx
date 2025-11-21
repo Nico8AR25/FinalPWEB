@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const SpectatorDashboard = ({ onLogout, user }) => {
@@ -7,6 +7,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
   const nivel = user?.nivel ?? 1;
   const puntos = user?.puntos ?? 0;
 
+  // STREAMERS + VIDEOS SINCRONIZADOS
   const streamers = [
     { nombre: "pgod", espectadores: 680, video: "/videos/video1.mp4" },
     { nombre: "Hitox", espectadores: 592, video: "/videos/video2.mp4" },
@@ -14,7 +15,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
     { nombre: "NicoAro", espectadores: 3300, video: "/videos/video4.mp4" },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMonedas(user?.monedas ?? 0);
   }, [user?.monedas]);
 
@@ -22,7 +23,8 @@ const SpectatorDashboard = ({ onLogout, user }) => {
 
   return (
     <div className="page-wrapper" style={{ marginLeft: "270px" }}>
-
+      
+      {/* NAVBAR */}
       <header className="navbar">
         <div className="navbar-brand">
           <h1>StreamBoost</h1>
@@ -33,15 +35,28 @@ const SpectatorDashboard = ({ onLogout, user }) => {
             <span id="nivel-text">Nivel <span id="nivel">{nivel}</span></span>
           </div>
 
-          <span className="monedas">Monedas: <span id="monedas">{monedas}</span></span>
-          <Link to="/recarga" target="_blank" className="perfil-button perfil-button-margin">Recargar Monedas</Link>
-          <Link to="/perfil" className="perfil-button">Perfil</Link>
-          <button className="logout-button" onClick={onLogout}>Cerrar sesión</button>
+          <span className="monedas">
+            Monedas: <span id="monedas">{monedas}</span>
+          </span>
+
+          <Link to="/recarga" target="_blank" className="perfil-button perfil-button-margin">
+            Recargar Monedas
+          </Link>
+
+          <Link to="/perfil" className="perfil-button">
+            Perfil
+          </Link>
+
+          <button className="logout-button" onClick={onLogout}>
+            Cerrar sesión
+          </button>
         </div>
       </header>
 
-
+      {/* LAYOUT GENERAL */}
       <main className="container-general" style={{ marginLeft: "270px" }}>
+
+        {/* SIDEBAR IZQUIERDO */}
         <div 
           style={{
             position: "fixed",
@@ -98,9 +113,15 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           ))}
         </div>
 
+        {/* SECCIÓN DE BIENVENIDA */}
         <div className="welcome-section">
-          <h2 id="saludo-usuario">Hola, {user?.nombre || user?.username || 'espectador'}</h2>
-          <p className="user-role">Rol: <span id="rol-usuario">{user?.rol || 'espectador'}</span></p>
+          <h2 id="saludo-usuario">
+            Hola, {user?.nombre || user?.username || 'espectador'}
+          </h2>
+
+          <p className="user-role">
+            Rol: <span id="rol-usuario">{user?.rol || 'espectador'}</span>
+          </p>
 
           <div className="user-level-info">
             <div className="level-badge">
@@ -113,6 +134,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           </div>
         </div>
 
+        {/* BUSCADOR */}
         <div className="search-section">
           <div className="search-container">
             <input 
@@ -127,6 +149,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           </div>
         </div>
 
+        {/* GALERÍA DE VIDEOS */}
         <div className="videos-section">
           <h3>📺 Streams Disponibles</h3>
 
@@ -149,6 +172,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
                   backgroundColor: "#000",
                 }}
               >
+                {/* LIVE + espectadores */}
                 <div
                   style={{
                     position: "absolute",
@@ -166,6 +190,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
                   LIVE ● {s.espectadores}
                 </div>
 
+                {/* VIDEO */}
                 <video
                   src={s.video}
                   controls
@@ -176,6 +201,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
                   }}
                 />
 
+                {/* Nombre streamer */}
                 <div
                   style={{
                     padding: "15px",
@@ -192,6 +218,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           </div>
         </div>
 
+        {/* TIENDA */}
         <div className="gifts-section">
           <Link to="/tienda-regalos" className="gifts-link">
             <h3>🎁 Tienda de Regalos</h3>
@@ -199,6 +226,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           <p className="text-secondary">Explora y compra regalos para tus streamers favoritos.</p>
         </div>
 
+        {/* REGALOS COMPRADOS */}
         <div className="purchased-gifts-section">
           <h3>Mis Regalos Comprados</h3>
           <div id="purchased-gifts-list" className="gifts-grid">
