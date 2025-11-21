@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function StreamPreview({ onEndStream, onGift }) {
   const navigate = useNavigate();
-  // Estado para métricas e interfaz
-  const [tiempoTranscurrido, setTiempoTranscurrido] = useState(0); // segundos desde que se abrió la pestaña
+  const [tiempoTranscurrido, setTiempoTranscurrido] = useState(0);
   const [espectadores, setEspectadores] = useState(23);
   const [actividad, setActividad] = useState([
     '🔥 Twitch te siguió — ahora',
@@ -19,7 +18,6 @@ export default function StreamPreview({ onEndStream, onGift }) {
   const [contadorRegalos, setContadorRegalos] = useState(0);
   const referenciaInput = useRef(null);
 
-  // Actualizar cada segundo el tiempo transcurrido
   useEffect(() => {
     const intervalo = setInterval(() => setTiempoTranscurrido((s) => s + 1), 1000);
     return () => clearInterval(intervalo);
@@ -32,7 +30,6 @@ export default function StreamPreview({ onEndStream, onGift }) {
     return `${h}:${m}:${s}`;
   }, [tiempoTranscurrido]);
 
-  // Simuladores
   const simularChat = () => {
     const valor = referenciaInput.current?.value?.trim();
     const mensaje = valor && valor.length ? valor : `Usuario${Math.floor(Math.random()*100)}: ¡Hola!`;
@@ -45,7 +42,6 @@ export default function StreamPreview({ onEndStream, onGift }) {
       `👤 ${nombre} te siguió — ahora`,
       ...a,
     ]);
-    // pequeño aumento de espectadores
     setEspectadores((v) => v + Math.ceil(Math.random()*3));
   };
   const simularRegalo = () => {
@@ -60,19 +56,15 @@ export default function StreamPreview({ onEndStream, onGift }) {
 
   return (
     <div className="page-wrapper">
-      {/* Barra superior */}
       <header className="sm-topbar">
         <div className="sm-title">Administrador de Transmisión</div>
         <div className="sm-metrics">
-          {/* Solo mostrar tiempo transcurrido y espectadores */}
           <div className="metric-badge metric-center">{etiquetaTiempo}</div>
           <div className="metric-badge metric-center">{espectadores} espectadores</div>
         </div>
       </header>
 
-      {/* Contenido en cuadrícula */}
       <main className="sm-grid">
-        {/* Columna izquierda: actividad + chat */}
         <aside className="sm-col fill-col">
           <section className="sm-panel grow">
             <h3 className="sm-panel-title">Actividad de Transmisión</h3>
@@ -96,12 +88,10 @@ export default function StreamPreview({ onEndStream, onGift }) {
           </section>
         </aside>
 
-        {/* Centro: vista previa */}
         <section className="sm-center">
           <div className="sm-panel">
             <h3 className="sm-panel-title">Vista Previa de Transmisión</h3>
             <div className="preview-box">
-              {/* Pantalla roja como marcador de posición en lugar de video */}
               <div className="red-screen" />
             </div>
             <div className="sm-status">
@@ -112,7 +102,6 @@ export default function StreamPreview({ onEndStream, onGift }) {
           </div>
         </section>
 
-        {/* Derecha: acciones rápidas */}
         <aside className="sm-col">
           <section className="sm-panel">
             <h3 className="sm-panel-title">Acciones Rápidas</h3>
@@ -129,7 +118,6 @@ export default function StreamPreview({ onEndStream, onGift }) {
           </section>
         </aside>
       </main>
-      {/* Controles de simulación en la parte inferior */}
       <footer className="sm-bottom-controls">
         <div className="controls-inner">
           <button className="btn btn-primary" onClick={simularChat}>Simular Chat</button>

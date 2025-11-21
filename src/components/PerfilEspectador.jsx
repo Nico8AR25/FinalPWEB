@@ -39,7 +39,6 @@ export default function PerfilEspectador({ coins = 0, level = 1, xp = 0, maxXp =
             </div>
             <p className="xp-text">XP: {xp} / {maxXp}</p>
             
-            {/* Botones de simulación */}
             <div className="simulation-controls">
               <button 
                 className="btn btn-primary" 

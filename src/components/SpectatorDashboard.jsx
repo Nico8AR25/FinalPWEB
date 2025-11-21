@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const SpectatorDashboard = ({ onLogout, user }) => {
@@ -15,7 +15,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
     { nombre: "NicoAro", espectadores: 3300, video: "/videos/video4.mp4" },
   ];
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMonedas(user?.monedas ?? 0);
   }, [user?.monedas]);
 
@@ -23,7 +23,6 @@ const SpectatorDashboard = ({ onLogout, user }) => {
 
   return (
     <div className="page-wrapper" style={{ marginLeft: "270px" }}>
-
       
       {/* NAVBAR */}
       <header className="navbar">
@@ -36,15 +35,25 @@ const SpectatorDashboard = ({ onLogout, user }) => {
             <span id="nivel-text">Nivel <span id="nivel">{nivel}</span></span>
           </div>
 
-          <span className="monedas">Monedas: <span id="monedas">{monedas}</span></span>
-          <Link to="/recarga" target="_blank" className="perfil-button perfil-button-margin">Recargar Monedas</Link>
-          <Link to="/perfil" className="perfil-button">Perfil</Link>
-          <button className="logout-button" onClick={onLogout}>Cerrar sesión</button>
+          <span className="monedas">
+            Monedas: <span id="monedas">{monedas}</span>
+          </span>
+
+          <Link to="/recarga" target="_blank" className="perfil-button perfil-button-margin">
+            Recargar Monedas
+          </Link>
+
+          <Link to="/perfil" className="perfil-button">
+            Perfil
+          </Link>
+
+          <button className="logout-button" onClick={onLogout}>
+            Cerrar sesión
+          </button>
         </div>
       </header>
 
-
-      {/* LAYOUT: ESPACIO PARA EL SIDEBAR */}
+      {/* LAYOUT GENERAL */}
       <main className="container-general" style={{ marginLeft: "270px" }}>
 
         {/* SIDEBAR IZQUIERDO */}
@@ -106,8 +115,13 @@ const SpectatorDashboard = ({ onLogout, user }) => {
 
         {/* SECCIÓN DE BIENVENIDA */}
         <div className="welcome-section">
-          <h2 id="saludo-usuario">Hola, {user?.nombre || user?.username || 'espectador'}</h2>
-          <p className="user-role">Rol: <span id="rol-usuario">{user?.rol || 'espectador'}</span></p>
+          <h2 id="saludo-usuario">
+            Hola, {user?.nombre || user?.username || 'espectador'}
+          </h2>
+
+          <p className="user-role">
+            Rol: <span id="rol-usuario">{user?.rol || 'espectador'}</span>
+          </p>
 
           <div className="user-level-info">
             <div className="level-badge">
@@ -135,7 +149,7 @@ const SpectatorDashboard = ({ onLogout, user }) => {
           </div>
         </div>
 
-        {/* GALERÍA DE VIDEOS (Twitch style) */}
+        {/* GALERÍA DE VIDEOS */}
         <div className="videos-section">
           <h3>📺 Streams Disponibles</h3>
 

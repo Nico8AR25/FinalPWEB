@@ -1,5 +1,4 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('donacions', {
@@ -13,6 +12,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       streamerId: {
+        type: Sequelize.INTEGER
+      },
+      streamId: {
         type: Sequelize.INTEGER
       },
       monto: {

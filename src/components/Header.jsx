@@ -4,7 +4,7 @@ const Header = ({ userBalance, userLevel }) => {
   return (
     <header className="header">
       <div className="logo">
-        <h1>StreamPlatform</h1>
+        <h1>StreamBoost</h1>
       </div>
       <nav>
         <ul>
