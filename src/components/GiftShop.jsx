@@ -55,7 +55,6 @@ export default function GiftShop({ onLogout, coins = 0, onSpend }) {
           <p className="text-secondary">Compra regalos para apoyar a tus streamers favoritos y gana puntos</p>
         </div>
 
-        {/* Lista de regalos disponibles */}
         <div className="gifts-section">
           <h3>Regalos Disponibles</h3>
           <div className="gifts-grid" id="gifts-list">
@@ -84,13 +83,10 @@ export default function GiftShop({ onLogout, coins = 0, onSpend }) {
           </div>
         </div>
 
-        {/* Botón para regresar */}
         <div className="back-section">
           <Link to="/dashboard" className="btn-back">← Regresar al Perfil</Link>
         </div>
       </main>
-      
-      {/* Modal de notificación personalizado */}
       {notificacion.show && (
         <div className="notification-modal">
           <div className="notification-content">

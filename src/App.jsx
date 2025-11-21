@@ -14,21 +14,17 @@ import Registro from './components/Registro';
 function App() {
   const [usuario, setUsuario] = useState(null);
   const [estaCargando, setEstaCargando] = useState(true);
-  // Estado de transmisión (elevado) para que Preview pueda actualizar Dashboard
   const [estaEnVivo, setEstaEnVivo] = useState(false);
-  const [inicioTransmision, setInicioTransmision] = useState(null); // milisegundos desde epoch
-  const [horasTransmitidas, setHorasTransmitidas] = useState(0); // horas acumuladas
+  const [inicioTransmision, setInicioTransmision] = useState(null);
+  const [horasTransmitidas, setHorasTransmitidas] = useState(0);
   const [totalRegalos, setTotalRegalos] = useState(0);
   const [puntosRecibidos, setPuntosRecibidos] = useState(0);
-  // Estado específico del usuario
   const [monedas, setMonedas] = useState(null);
   const [nivelEspectador, setNivelEspectador] = useState(null);
   const [xpEspectador, setXpEspectador] = useState(null);
   const [xpMaxEspectador, setXpMaxEspectador] = useState(null);
 
-  // Verificación de autenticación simulada
   useEffect(() => {
-    // Verificar si el usuario está logueado
     const usuarioLogueado = localStorage.getItem('user');
     if (usuarioLogueado) {
       const datosUsuario = JSON.parse(usuarioLogueado);
@@ -36,7 +32,7 @@ function App() {
       setMonedas(datosUsuario.monedas ?? 0);
       setNivelEspectador(datosUsuario.nivel ?? 1);
       setXpEspectador(datosUsuario.puntos ?? 0);
-      setXpMaxEspectador(100); // Puedes ajustar esto si quieres guardar xpMax por usuario
+      setXpMaxEspectador(100);
     }
     setEstaCargando(false);
   }, []);
@@ -54,7 +50,6 @@ function App() {
     setUsuario(null);
   };
 
-  // Manejadores de control de transmisión
   const manejarIniciarTransmision = () => {
     setEstaEnVivo(true);
     setInicioTransmision(Date.now());
@@ -75,12 +70,10 @@ function App() {
     setPuntosRecibidos((p) => p + (puntos || 0));
   };
 
-  // Manejadores de monedas del espectador
   const manejarRecarga = (cantidad) => {
     const valor = Number(cantidad) || 0;
     setMonedas((c) => {
       const nuevasMonedas = c + valor;
-      // Persistir en localStorage
       const datosUsuario = JSON.parse(localStorage.getItem('user'));
       if (datosUsuario) {
         datosUsuario.monedas = nuevasMonedas;
@@ -93,7 +86,6 @@ function App() {
     const valor = Number(cantidad) || 0;
     setMonedas((c) => {
       const nuevasMonedas = Math.max(0, c - valor);
-      // Persistir en localStorage
       const datosUsuario = JSON.parse(localStorage.getItem('user'));
       if (datosUsuario) {
         datosUsuario.monedas = nuevasMonedas;
@@ -103,11 +95,10 @@ function App() {
     });
   };
 
-  // Manejadores de XP/nivel del espectador
   const manejarSubirNivel = () => {
     setNivelEspectador((l) => l + 1);
     setXpEspectador(0);
-    setXpMaxEspectador((m) => Math.floor(m * 1.5)); // aumentar requisito en 50%
+    setXpMaxEspectador((m) => Math.floor(m * 1.5));
   };
   const manejarAgregarXp = (cantidad) => {
     setXpEspectador((x) => Math.min(x + cantidad, xpMaxEspectador));

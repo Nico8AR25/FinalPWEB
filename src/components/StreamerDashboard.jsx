@@ -23,13 +23,12 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
   };
 
   const actualizarProgreso = (horas) => {
-    const horasParaSiguienteNivel = nivelActual * 5; // 5 horas por nivel
+    const horasParaSiguienteNivel = nivelActual * 5;
     const nuevoProgreso = (horas / horasParaSiguienteNivel) * 100;
     setProgreso(Math.min(nuevoProgreso, 100));
     setHorasParaSiguiente(Math.max(0, horasParaSiguienteNivel - horas));
   };
 
-  // calcular horas transcurridas en vivo
   const horasTranscurridasEnVivo = useMemo(() => {
     if (!isLive || !streamStart) return 0;
     const diferenciaMs = Date.now() - streamStart;
@@ -39,14 +38,12 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
   const horasTotales = (horasTransmitidas || 0) + horasTranscurridasEnVivo;
 
   useEffect(() => {
-    // actualizar progreso mientras está en vivo
     actualizarProgreso(horasTotales);
     if (!isLive) return;
     const intervalo = setInterval(() => {
       actualizarProgreso((horasTransmitidas || 0) + ((Date.now() - (streamStart || 0)) / (1000 * 60 * 60)));
     }, 1000);
     return () => clearInterval(intervalo);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLive, streamStart, horasTransmitidas]);
 
   useEffect(() => {
@@ -71,14 +68,12 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
         <div className="card">
           <h2>Dashboard del Streamer</h2>
           
-          {/* Estado RTMP */}
           <div className="metric">
             <span id="rtmp-status" className={`rtmp-${estadoRtmp === 'conectado' ? 'connected' : 'disconnected'}`}>
               RTMP: {estadoRtmp}
             </span>
           </div>
           
-          {/* Botones de control */}
           <div className="control-buttons">
             <button
               type="button"
@@ -100,12 +95,10 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
             </button>
           </div>
           
-          {/* Métricas */}
           <div className="metric">
             Horas transmitidas: <span id="horas-transmitidas">{horasTotales.toFixed(2)}</span> h
           </div>
           
-          {/* Progreso hacia siguiente nivel */}
           <div className="progress-container">
             <div className="progress-label">Progreso hacia siguiente nivel:</div>
             <div className="progress">
@@ -122,7 +115,6 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
           
           <p className="text-secondary">Última actualización: ahora</p>
 
-          {/* Regalos recibidos */}
           <section className="gifts-panel">
             <h3 className="gifts-title">🎁 Regalos Recibidos</h3>
             <p className="gifts-subtitle">Regalos enviados por tus espectadores durante las transmisiones</p>
