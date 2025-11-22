@@ -2,82 +2,108 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+	const [username, setUsername] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+	const navigate = useNavigate();
 
-  function getUsers() {
-    const users = localStorage.getItem("usuariosRegistrados");
-    return users ? JSON.parse(users) : [];
-  }
+	const handleSubmit = e => {
+		e.preventDefault();
+		const correo = username.trim().toLowerCase();
+		const pass = password.trim();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const value = username.trim().toLowerCase();
-    const pass = password.trim();
-    const users = getUsers();
-    const user = users.find(u => u.email === value && u.password === pass);
-    if (!user) {
-      setError("Credenciales incorrectas o usuario no registrado.");
-      return;
-    }
-    localStorage.setItem('user', JSON.stringify(user));
-    onLogin?.(user);
-    navigate('/dashboard');
-  };
+		setError('');
 
-  return (
-    <div className="login-center">
-      <div className="contenedor">
-      <div className="marca-universidad">
-        <img src="/logo.png" alt="StreamBoost" className="imagen-logo" />
-        <h1 className="titulo-universidad">STREAMBOOST</h1>
-      </div>
+		fetch('http://localhost:3080/users/login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ correo, password: pass }),
+		})
+			.then(async res => {
+				const body = await res.json().catch(() => ({}));
+				if (!res.ok) {
+					const msg =
+						body && body.error ? body.error : 'Credenciales incorrectas';
+					setError(msg);
+					return;
+				}
+				// Login exitoso: `body` contiene el usuario
+				try {
+					localStorage.setItem('user', JSON.stringify(body));
+				} catch {
+					// no bloqueante
+				}
+				onLogin?.(body);
+				navigate('/dashboard');
+			})
+			.catch(() => {
+				setError('No se pudo conectar con el servidor');
+			});
+	};
 
-  <form id="loginForm" className="formulario-login" onSubmit={handleSubmit}>
-        <div className="grupo-formulario">
-          <label htmlFor="email">Usuario</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="streamer o espectador"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="grupo-formulario">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="********"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="boton-login">Iniciar sesión</button>
-        {error && <div className="login-error">{error}</div>}
-        <div className="login-link-container">
-          <Link to="/registro" className="login-link">¿No estás registrado?</Link>
-        </div>
-      </form>
+	return (
+		<div className="login-center">
+			<div className="contenedor">
+				<div className="marca-universidad">
+					<img src="/logo.png" alt="StreamBoost" className="imagen-logo" />
+					<h1 className="titulo-universidad">STREAMBOOST</h1>
+				</div>
 
-      <nav className="navegacion-principal">
-        <ul className="enlaces-navegacion">
-          <li><Link to="/nosotros">Nosotros</Link></li>
-          <li><Link to="/tyc">Términos y Condiciones</Link></li>
-        </ul>
-      </nav>
+				<form
+					id="loginForm"
+					className="formulario-login"
+					onSubmit={handleSubmit}
+				>
+					<div className="grupo-formulario">
+						<label htmlFor="email">Usuario</label>
+						<input
+							type="text"
+							id="email"
+							placeholder="streamer o espectador"
+							value={username}
+							onChange={e => setUsername(e.target.value)}
+							required
+						/>
+					</div>
+					<div className="grupo-formulario">
+						<label htmlFor="password">Contraseña</label>
+						<input
+							type="password"
+							id="password"
+							placeholder="********"
+							value={password}
+							onChange={e => setPassword(e.target.value)}
+							required
+						/>
+					</div>
+					<button type="submit" className="boton-login">
+						Iniciar sesión
+					</button>
+					{error && <div className="login-error">{error}</div>}
+					<div className="login-link-container">
+						<Link to="/registro" className="login-link">
+							¿No estás registrado?
+						</Link>
+					</div>
+				</form>
 
-      <footer className="pie-pagina">
-        <p>© 2025 StreamBoost Inc. Todos los derechos reservados.</p>
-      </footer>
-      </div>
-    </div>
-  );
+				<nav className="navegacion-principal">
+					<ul className="enlaces-navegacion">
+						<li>
+							<Link to="/nosotros">Nosotros</Link>
+						</li>
+						<li>
+							<Link to="/tyc">Términos y Condiciones</Link>
+						</li>
+					</ul>
+				</nav>
+
+				<footer className="pie-pagina">
+					<p>© 2025 StreamBoost Inc. Todos los derechos reservados.</p>
+				</footer>
+			</div>
+		</div>
+	);
 };
 
 export default Login;
