@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../perfil.css';
 
 export default function PerfilEspectador({ coins = 0, level = 1, xp = 0, maxXp = 100, onLogout, onLevelUp, onAddXp }) {
   const navigate = useNavigate();
+  const xpBarRef = useRef(null);
   
   const usuario = JSON.parse(localStorage.getItem('user') || '{}');
   const nombreUsuario = usuario.username || usuario.nombre || 'Espectador';
+
+  useEffect(() => {
+    if (xpBarRef.current) {
+      const porcentaje = (xp / maxXp) * 100;
+      xpBarRef.current.style.setProperty('--xp-percentage', porcentaje);
+    }
+  }, [xp, maxXp]);
 
   return (
     <div className="page-wrapper">
@@ -33,8 +41,8 @@ export default function PerfilEspectador({ coins = 0, level = 1, xp = 0, maxXp =
             <h3>Nivel {level}</h3>
             <div className="xp-bar-large">
               <div 
-                className="xp-bar-fill" 
-                style={{ width: `${(xp / maxXp) * 100}%` }}
+                ref={xpBarRef}
+                className="xp-bar-fill"
               ></div>
             </div>
             <p className="xp-text">XP: {xp} / {maxXp}</p>
