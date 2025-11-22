@@ -27,13 +27,22 @@ const Login = ({ onLogin }) => {
 					setError(msg);
 					return;
 				}
-				// Login exitoso: `body` contiene el usuario
+				// Login exitoso: `body` contiene el usuario del backend.
+				// Normalizamos la respuesta para que el frontend tenga `rol`, `email`, `monedas`, `nivel`, `puntos`.
+				const frontendUser = {
+					...body,
+					rol: body.tipoUsuario || body.rol,
+					email: body.correo || body.email,
+					monedas: body.saldo ?? body.monedas ?? 0,
+					nivel: body.nivel ?? body.nivel ?? 1,
+					puntos: body.puntos ?? body.puntos ?? 0,
+				};
 				try {
-					localStorage.setItem('user', JSON.stringify(body));
+					localStorage.setItem('user', JSON.stringify(frontendUser));
 				} catch {
 					// no bloqueante
 				}
-				onLogin?.(body);
+				onLogin?.(frontendUser);
 				navigate('/dashboard');
 			})
 			.catch(() => {

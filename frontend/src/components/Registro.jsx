@@ -70,8 +70,11 @@ export default function Registro() {
 					const users = getUsers();
 					users.push({
 						nombre: data.nombre,
-						email: data.correo,
-						rol: data.tipoUsuario,
+						email: data.email || data.correo,
+						rol: data.rol || data.tipoUsuario,
+						monedas: data.monedas ?? 0,
+						nivel: data.nivel ?? 1,
+						puntos: data.puntos ?? 0,
 					});
 					saveUsers(users);
 				} catch {
