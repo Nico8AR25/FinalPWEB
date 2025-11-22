@@ -24,6 +24,16 @@ module.exports = {
       saldo: {
         type: Sequelize.INTEGER
       },
+      nivel: {             
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1
+      },
+      puntos: {            
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

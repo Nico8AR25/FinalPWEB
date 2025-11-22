@@ -38,19 +38,19 @@ const Login = ({ onLogin }) => {
 					puntos: body.puntos ?? 0,
 				};
 
-				// Fusionar con valores locales si existen (priorizar datos guardados en localStorage)
+				// Fusionar con valores locales solo si el localStorage corresponde al mismo usuario
 				const ls = localStorage.getItem('user');
 				if (ls) {
 					try {
 						const local = JSON.parse(ls);
-						if (local.monedas != null) frontendUser.monedas = local.monedas;
-						if (local.nivel != null) frontendUser.nivel = local.nivel;
-						if (local.puntos != null) frontendUser.puntos = local.puntos;
-						// conservar nombre/email del backend si vienen, si no usar lo local
-						frontendUser.nombre =
-							frontendUser.nombre || local.nombre || local.username;
-						frontendUser.email =
-							frontendUser.email || local.email || local.correo;
+						if (local && local.id && body && body.id && Number(local.id) === Number(body.id)) {
+							if (local.monedas != null) frontendUser.monedas = local.monedas;
+							if (local.nivel != null) frontendUser.nivel = local.nivel;
+							if (local.puntos != null) frontendUser.puntos = local.puntos;
+							// conservar nombre/email del backend si vienen, si no usar lo local
+							frontendUser.nombre = frontendUser.nombre || local.nombre || local.username;
+							frontendUser.email = frontendUser.email || local.email || local.correo;
+						}
 					} catch {
 						// ignore parse errors
 					}

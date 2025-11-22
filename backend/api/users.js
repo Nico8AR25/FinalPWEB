@@ -18,6 +18,8 @@ ruta.post('/registro', async (req, res) => {
 			password,
 			tipoUsuario,
 			saldo: saldo || 0,
+			nivel: 1,
+			puntos: 0,
 		});
 
 		// Normalizar la respuesta para el frontend y ocultar password
@@ -28,8 +30,8 @@ ruta.post('/registro', async (req, res) => {
 			tipoUsuario: nuevoUsuario.tipoUsuario,
 			rol: nuevoUsuario.tipoUsuario,
 			monedas: nuevoUsuario.saldo || 0,
-			nivel: 1,
-			puntos: 0,
+			nivel: nuevoUsuario.nivel ?? 1,
+			puntos: nuevoUsuario.puntos ?? 0,
 		};
 
 		res.json(resp);
@@ -89,6 +91,93 @@ ruta.put('/recarga', async (req, res) => {
 		res.json(usuario);
 	} else {
 		res.status(404).json({ error: 'Usuario no encontrado' });
+	}
+});
+
+// Actualizar nivel (set)
+ruta.put('/nivel', async (req, res) => {
+	const { userId, nivel } = req.body;
+	if (typeof nivel !== 'number') return res.status(400).json({ error: 'nivel debe ser número' });
+	const usuario = await db.user.findByPk(userId);
+	if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
+	usuario.nivel = nivel;
+	await usuario.save();
+	res.json({ id: usuario.id, nivel: usuario.nivel, puntos: usuario.puntos, saldo: usuario.saldo });
+});
+
+// Establecer puntos (set absolute)
+ruta.put('/puntos', async (req, res) => {
+	const { userId, puntos } = req.body;
+	if (typeof puntos !== 'number') return res.status(400).json({ error: 'puntos debe ser número' });
+	const usuario = await db.user.findByPk(userId);
+	if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
+	usuario.puntos = puntos;
+	await usuario.save();
+	res.json({ id: usuario.id, nivel: usuario.nivel, puntos: usuario.puntos, saldo: usuario.saldo });
+});
+
+// Sumar/añadir puntos (delta)
+ruta.put('/puntos/add', async (req, res) => {
+	const { userId, delta } = req.body;
+	const d = Number(delta) || 0;
+	const usuario = await db.user.findByPk(userId);
+	if (!usuario) return res.status(404).json({ error: 'Usuario no encontrado' });
+	usuario.puntos = (usuario.puntos || 0) + d;
+	await usuario.save();
+	res.json({ id: usuario.id, nivel: usuario.nivel, puntos: usuario.puntos, saldo: usuario.saldo });
+});
+
+// Listar regalos comprados por usuario
+ruta.get('/:id/regalos', async (req, res) => {
+	try {
+		const regalos = await db.regalo_comprado.findAll({
+			where: { userId: req.params.id },
+			order: [['createdAt', 'DESC']]
+		});
+		res.json(regalos);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+});
+
+// Registrar compra de regalo: transaccional (descontar saldo, sumar puntos, crear registro)
+ruta.post('/:id/regalos', async (req, res) => {
+	const userId = req.params.id;
+	const { giftId, nombre, costo, puntos } = req.body;
+	if (!costo || isNaN(Number(costo))) return res.status(400).json({ error: 'Costo inválido' });
+	try {
+		const resultado = await db.sequelize.transaction(async (t) => {
+			const usuario = await db.user.findByPk(userId, { transaction: t, lock: t.LOCK.UPDATE });
+			if (!usuario) {
+				const e = new Error('Usuario no encontrado');
+				e.status = 404;
+				throw e;
+			}
+			const saldoActual = usuario.saldo || 0;
+			if (saldoActual < Number(costo)) {
+				const e = new Error('Saldo insuficiente');
+				e.status = 400;
+				throw e;
+			}
+			usuario.saldo = saldoActual - Number(costo);
+			usuario.puntos = (usuario.puntos || 0) + (Number(puntos) || 0);
+			await usuario.save({ transaction: t });
+
+			const compra = await db.regalo_comprado.create({
+				userId: usuario.id,
+				giftId: giftId || null,
+				nombre: nombre || null,
+				costo: Number(costo),
+				puntos: Number(puntos) || 0
+			}, { transaction: t });
+
+			return { usuario, compra };
+		});
+
+		res.json({ usuario: resultado.usuario, compra: resultado.compra });
+	} catch (error) {
+		if (error.status) return res.status(error.status).json({ error: error.message });
+		res.status(500).json({ error: error.message });
 	}
 });
 
