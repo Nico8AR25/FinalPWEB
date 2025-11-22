@@ -1,9 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = 3080;
 
+// Habilitar CORS para desarrollo (permitir peticiones desde el frontend)
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {

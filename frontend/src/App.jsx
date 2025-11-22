@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Route,
+	Routes,
+	Navigate,
+} from 'react-router-dom';
 import Login from './components/Login';
 import About from './components/About';
 import Terms from './components/Terms';
@@ -12,186 +17,249 @@ import PerfilEspectador from './components/PerfilEspectador';
 import Registro from './components/Registro';
 
 function App() {
-  const [usuario, setUsuario] = useState(null);
-  const [estaCargando, setEstaCargando] = useState(true);
-  const [estaEnVivo, setEstaEnVivo] = useState(false);
-  const [inicioTransmision, setInicioTransmision] = useState(null);
-  const [horasTransmitidas, setHorasTransmitidas] = useState(0);
-  const [totalRegalos, setTotalRegalos] = useState(0);
-  const [puntosRecibidos, setPuntosRecibidos] = useState(0);
-  const [monedas, setMonedas] = useState(null);
-  const [nivelEspectador, setNivelEspectador] = useState(null);
-  const [xpEspectador, setXpEspectador] = useState(null);
-  const [xpMaxEspectador, setXpMaxEspectador] = useState(null);
+	const [usuario, setUsuario] = useState(null);
+	const [estaCargando, setEstaCargando] = useState(true);
+	const [estaEnVivo, setEstaEnVivo] = useState(false);
+	const [inicioTransmision, setInicioTransmision] = useState(null);
+	const [horasTransmitidas, setHorasTransmitidas] = useState(0);
+	const [totalRegalos, setTotalRegalos] = useState(0);
+	const [puntosRecibidos, setPuntosRecibidos] = useState(0);
+	const [monedas, setMonedas] = useState(null);
+	const [nivelEspectador, setNivelEspectador] = useState(null);
+	const [xpEspectador, setXpEspectador] = useState(null);
+	const [xpMaxEspectador, setXpMaxEspectador] = useState(null);
 
-  useEffect(() => {
-    const usuarioLogueado = localStorage.getItem('user');
-    if (usuarioLogueado) {
-      const datosUsuario = JSON.parse(usuarioLogueado);
-      setUsuario(datosUsuario);
-      setMonedas(datosUsuario.monedas ?? 0);
-      setNivelEspectador(datosUsuario.nivel ?? 1);
-      setXpEspectador(datosUsuario.puntos ?? 0);
-      setXpMaxEspectador(100);
-    }
-    setEstaCargando(false);
-  }, []);
+	useEffect(() => {
+		const usuarioLogueado = localStorage.getItem('user');
+		if (usuarioLogueado) {
+			const raw = JSON.parse(usuarioLogueado);
+			const datosUsuario = {
+				...raw,
+				rol: raw.rol || raw.tipoUsuario || raw.userRole || raw.role,
+				email: raw.email || raw.correo,
+				monedas: raw.monedas ?? raw.saldo ?? 0,
+				nivel: raw.nivel ?? 1,
+				puntos: raw.puntos ?? 0,
+			};
+			setUsuario(datosUsuario);
+			setMonedas(datosUsuario.monedas ?? 0);
+			setNivelEspectador(datosUsuario.nivel ?? 1);
+			setXpEspectador(datosUsuario.puntos ?? 0);
+			setXpMaxEspectador(100);
+		}
+		setEstaCargando(false);
+	}, []);
 
-  const manejarLogin = (credenciales) => {
-    setUsuario(credenciales);
-    setMonedas(credenciales.monedas ?? 0);
-    setNivelEspectador(credenciales.nivel ?? 1);
-    setXpEspectador(credenciales.puntos ?? 0);
-    setXpMaxEspectador(100);
-  };
+	const manejarLogin = credenciales => {
+		setUsuario(credenciales);
+		setMonedas(credenciales.monedas ?? 0);
+		setNivelEspectador(credenciales.nivel ?? 1);
+		setXpEspectador(credenciales.puntos ?? 0);
+		setXpMaxEspectador(100);
+	};
 
-  const manejarCerrarSesion = () => {
-    localStorage.removeItem('user');
-    setUsuario(null);
-  };
+	const manejarCerrarSesion = () => {
+		// Guardar en localStorage el estado actual del usuario (monedas, nivel, puntos)
+		// antes de limpiar el estado en memoria, para no perder cambios recientes.
+		try {
+			const datosUsuario = JSON.parse(localStorage.getItem('user')) || {};
+			if (datosUsuario) {
+				datosUsuario.monedas = monedas ?? datosUsuario.monedas;
+				datosUsuario.nivel = nivelEspectador ?? datosUsuario.nivel;
+				datosUsuario.puntos = xpEspectador ?? datosUsuario.puntos;
+				localStorage.setItem('user', JSON.stringify(datosUsuario));
+			}
+		} catch {
+			// no bloqueante
+		}
+		// Solo limpiamos el estado en memoria para cerrar sesión en la app.
+		setUsuario(null);
+	};
 
-  const manejarIniciarTransmision = () => {
-    setEstaEnVivo(true);
-    setInicioTransmision(Date.now());
-  };
+	const manejarIniciarTransmision = () => {
+		setEstaEnVivo(true);
+		setInicioTransmision(Date.now());
+	};
 
-  const manejarDetenerTransmision = () => {
-    if (estaEnVivo && inicioTransmision) {
-      const milisegundosTranscurridos = Date.now() - inicioTransmision;
-      const horasTranscurridas = milisegundosTranscurridos / (1000 * 60 * 60);
-      setHorasTransmitidas((h) => h + horasTranscurridas);
-    }
-    setEstaEnVivo(false);
-    setInicioTransmision(null);
-  };
+	const manejarDetenerTransmision = () => {
+		if (estaEnVivo && inicioTransmision) {
+			const milisegundosTranscurridos = Date.now() - inicioTransmision;
+			const horasTranscurridas = milisegundosTranscurridos / (1000 * 60 * 60);
+			setHorasTransmitidas(h => h + horasTranscurridas);
+		}
+		setEstaEnVivo(false);
+		setInicioTransmision(null);
+	};
 
-  const manejarRegalo = (puntos) => {
-    setTotalRegalos((g) => g + 1);
-    setPuntosRecibidos((p) => p + (puntos || 0));
-  };
+	const manejarRegalo = puntos => {
+		setTotalRegalos(g => g + 1);
+		setPuntosRecibidos(p => p + (puntos || 0));
+	};
 
-  const manejarRecarga = (cantidad) => {
-    const valor = Number(cantidad) || 0;
-    setMonedas((c) => {
-      const nuevasMonedas = c + valor;
-      const datosUsuario = JSON.parse(localStorage.getItem('user'));
-      if (datosUsuario) {
-        datosUsuario.monedas = nuevasMonedas;
-        localStorage.setItem('user', JSON.stringify(datosUsuario));
-      }
-      return nuevasMonedas;
-    });
-  };
-  const manejarGastar = (cantidad) => {
-    const valor = Number(cantidad) || 0;
-    setMonedas((c) => {
-      const nuevasMonedas = Math.max(0, c - valor);
-      const datosUsuario = JSON.parse(localStorage.getItem('user'));
-      if (datosUsuario) {
-        datosUsuario.monedas = nuevasMonedas;
-        localStorage.setItem('user', JSON.stringify(datosUsuario));
-      }
-      return nuevasMonedas;
-    });
-  };
+	const manejarRecarga = cantidad => {
+		const valor = Number(cantidad) || 0;
+		setMonedas(c => {
+			const nuevasMonedas = c + valor;
+			const datosUsuario = JSON.parse(localStorage.getItem('user'));
+			if (datosUsuario) {
+				datosUsuario.monedas = nuevasMonedas;
+				localStorage.setItem('user', JSON.stringify(datosUsuario));
+			}
+			return nuevasMonedas;
+		});
+	};
+	const manejarGastar = cantidad => {
+		const valor = Number(cantidad) || 0;
+		setMonedas(c => {
+			const nuevasMonedas = Math.max(0, c - valor);
+			const datosUsuario = JSON.parse(localStorage.getItem('user'));
+			if (datosUsuario) {
+				datosUsuario.monedas = nuevasMonedas;
+				localStorage.setItem('user', JSON.stringify(datosUsuario));
+			}
+			return nuevasMonedas;
+		});
+	};
 
-  const manejarSubirNivel = () => {
-    setNivelEspectador((l) => l + 1);
-    setXpEspectador(0);
-    setXpMaxEspectador((m) => Math.floor(m * 1.5));
-  };
-  const manejarAgregarXp = (cantidad) => {
-    setXpEspectador((x) => Math.min(x + cantidad, xpMaxEspectador));
-  };
+	const manejarSubirNivel = () => {
+		setNivelEspectador(l => l + 1);
+		setXpEspectador(0);
+		setXpMaxEspectador(m => Math.floor(m * 1.5));
+	};
+	const manejarAgregarXp = cantidad => {
+		setXpEspectador(x => Math.min(x + cantidad, xpMaxEspectador));
+	};
 
-  if (estaCargando) {
-    return <div>Cargando...</div>;
-  }
+	// Persistir cambios de nivel/XP en localStorage para mantener consistencia
+	useEffect(() => {
+		try {
+			const datosUsuario = JSON.parse(localStorage.getItem('user')) || {};
+			if (datosUsuario) {
+				datosUsuario.monedas = monedas ?? datosUsuario.monedas;
+				datosUsuario.nivel = nivelEspectador ?? datosUsuario.nivel;
+				datosUsuario.puntos = xpEspectador ?? datosUsuario.puntos;
+				localStorage.setItem('user', JSON.stringify(datosUsuario));
+			}
+		} catch {
+			// no bloqueante
+		}
+	}, [monedas, nivelEspectador, xpEspectador]);
 
-  return (
-    <Router>
-      <div className="app">
-        <Routes>
-          <Route path="/" element={
-            !usuario ? (
-              <Login onLogin={manejarLogin} />
-            ) : (
-              <Navigate to="/dashboard" />
-            )
-          } />
-          <Route path="/registro" element={<Registro />} />
-          
-          <Route path="/dashboard" element={
-            usuario ? (
-              usuario.rol === 'streamer' ? (
-                <StreamerDashboard
-                  onLogout={manejarCerrarSesion}
-                  user={usuario}
-                  isLive={estaEnVivo}
-                  streamStart={inicioTransmision}
-                  horasTransmitidas={horasTransmitidas}
-                  totalGifts={totalRegalos}
-                  receivedPoints={puntosRecibidos}
-                  onStartStream={manejarIniciarTransmision}
-                  onStopStream={manejarDetenerTransmision}
-                />
-              ) : (
-                <SpectatorDashboard 
-                  onLogout={manejarCerrarSesion} 
-                  user={usuario}
-                  coins={monedas}
-                  level={nivelEspectador}
-                  xp={xpEspectador}
-                  maxXp={xpMaxEspectador}
-                />
-              )
-            ) : (
-              <Navigate to="/" />
-            )
-          } />
+	if (estaCargando) {
+		return <div>Cargando...</div>;
+	}
 
-          <Route path="/nosotros" element={<About />} />
-          <Route path="/tyc" element={<Terms />} />
-          <Route path="/tienda-regalos" element={
-            usuario && usuario.rol === 'espectador' ? (
-              <GiftShop onLogout={manejarCerrarSesion} coins={monedas} onSpend={manejarGastar} />
-            ) : (
-              <Navigate to="/" />
-            )
-          } />
-          <Route path="/recarga" element={
-            usuario && usuario.rol === 'espectador' ? (
-              <Recarga onRecharge={manejarRecarga} />
-            ) : (
-              <Navigate to="/" />
-            )
-          } />
-          <Route path="/perfil" element={
-            usuario && usuario.rol === 'espectador' ? (
-              <PerfilEspectador 
-                coins={monedas}
-                level={nivelEspectador}
-                xp={xpEspectador}
-                maxXp={xpMaxEspectador}
-                onLogout={manejarCerrarSesion}
-                onLevelUp={manejarSubirNivel}
-                onAddXp={manejarAgregarXp}
-              />
-            ) : (
-              <Navigate to="/" />
-            )
-          } />
-          <Route path="/stream-preview" element={
-            usuario && usuario.rol === 'streamer' ? (
-              <StreamPreview onEndStream={manejarDetenerTransmision} onGift={manejarRegalo} />
-            ) : (
-              <Navigate to="/" />
-            )
-          } />
-        </Routes>
-      </div>
-    </Router>
-  )
+	return (
+		<Router>
+			<div className="app">
+				<Routes>
+					<Route
+						path="/"
+						element={
+							!usuario ? (
+								<Login onLogin={manejarLogin} />
+							) : (
+								<Navigate to="/dashboard" />
+							)
+						}
+					/>
+					<Route path="/registro" element={<Registro />} />
+
+					<Route
+						path="/dashboard"
+						element={
+							usuario ? (
+								usuario.rol === 'streamer' ? (
+									<StreamerDashboard
+										onLogout={manejarCerrarSesion}
+										user={usuario}
+										isLive={estaEnVivo}
+										streamStart={inicioTransmision}
+										horasTransmitidas={horasTransmitidas}
+										totalGifts={totalRegalos}
+										receivedPoints={puntosRecibidos}
+										onStartStream={manejarIniciarTransmision}
+										onStopStream={manejarDetenerTransmision}
+									/>
+								) : (
+									<SpectatorDashboard
+										onLogout={manejarCerrarSesion}
+										user={usuario}
+										coins={monedas}
+										level={nivelEspectador}
+										xp={xpEspectador}
+										maxXp={xpMaxEspectador}
+									/>
+								)
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+
+					<Route path="/nosotros" element={<About />} />
+					<Route path="/tyc" element={<Terms />} />
+					<Route
+						path="/tienda-regalos"
+						element={
+							usuario && usuario.rol === 'espectador' ? (
+								<GiftShop
+									onLogout={manejarCerrarSesion}
+									coins={monedas}
+									onSpend={manejarGastar}
+									xp={xpEspectador}
+									onEarnPoints={manejarAgregarXp}
+								/>
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+					<Route
+						path="/recarga"
+						element={
+							usuario && usuario.rol === 'espectador' ? (
+								<Recarga onRecharge={manejarRecarga} />
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+					<Route
+						path="/perfil"
+						element={
+							usuario && usuario.rol === 'espectador' ? (
+								<PerfilEspectador
+									coins={monedas}
+									level={nivelEspectador}
+									xp={xpEspectador}
+									maxXp={xpMaxEspectador}
+									onLogout={manejarCerrarSesion}
+									onLevelUp={manejarSubirNivel}
+									onAddXp={manejarAgregarXp}
+								/>
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+					<Route
+						path="/stream-preview"
+						element={
+							usuario && usuario.rol === 'streamer' ? (
+								<StreamPreview
+									onEndStream={manejarDetenerTransmision}
+									onGift={manejarRegalo}
+								/>
+							) : (
+								<Navigate to="/" />
+							)
+						}
+					/>
+				</Routes>
+			</div>
+		</Router>
+	);
 }
 
-export default App
+export default App;
