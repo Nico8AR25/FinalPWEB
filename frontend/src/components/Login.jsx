@@ -34,9 +34,28 @@ const Login = ({ onLogin }) => {
 					rol: body.tipoUsuario || body.rol,
 					email: body.correo || body.email,
 					monedas: body.saldo ?? body.monedas ?? 0,
-					nivel: body.nivel ?? body.nivel ?? 1,
-					puntos: body.puntos ?? body.puntos ?? 0,
+					nivel: body.nivel ?? 1,
+					puntos: body.puntos ?? 0,
 				};
+
+				// Fusionar con valores locales si existen (priorizar datos guardados en localStorage)
+				const ls = localStorage.getItem('user');
+				if (ls) {
+					try {
+						const local = JSON.parse(ls);
+						if (local.monedas != null) frontendUser.monedas = local.monedas;
+						if (local.nivel != null) frontendUser.nivel = local.nivel;
+						if (local.puntos != null) frontendUser.puntos = local.puntos;
+						// conservar nombre/email del backend si vienen, si no usar lo local
+						frontendUser.nombre =
+							frontendUser.nombre || local.nombre || local.username;
+						frontendUser.email =
+							frontendUser.email || local.email || local.correo;
+					} catch {
+						// ignore parse errors
+					}
+				}
+
 				try {
 					localStorage.setItem('user', JSON.stringify(frontendUser));
 				} catch {

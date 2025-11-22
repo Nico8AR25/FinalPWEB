@@ -59,7 +59,20 @@ function App() {
 	};
 
 	const manejarCerrarSesion = () => {
-		localStorage.removeItem('user');
+		// Guardar en localStorage el estado actual del usuario (monedas, nivel, puntos)
+		// antes de limpiar el estado en memoria, para no perder cambios recientes.
+		try {
+			const datosUsuario = JSON.parse(localStorage.getItem('user')) || {};
+			if (datosUsuario) {
+				datosUsuario.monedas = monedas ?? datosUsuario.monedas;
+				datosUsuario.nivel = nivelEspectador ?? datosUsuario.nivel;
+				datosUsuario.puntos = xpEspectador ?? datosUsuario.puntos;
+				localStorage.setItem('user', JSON.stringify(datosUsuario));
+			}
+		} catch {
+			// no bloqueante
+		}
+		// Solo limpiamos el estado en memoria para cerrar sesión en la app.
 		setUsuario(null);
 	};
 
