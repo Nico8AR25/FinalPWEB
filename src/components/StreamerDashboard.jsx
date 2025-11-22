@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive, streamStart, horasTransmitidas, totalGifts, receivedPoints }) => {
@@ -8,6 +8,7 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
   const [horasParaSiguiente, setHorasParaSiguiente] = useState(5.0);
   const [nivelActual, setNivelActual] = useState(user?.nivel ?? 1);
   const navigate = useNavigate();
+  const progressBarRef = useRef(null);
 
   const iniciarTransmision = () => {
     setEstaTransmitiendo(true);
@@ -50,6 +51,12 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
     setEstaTransmitiendo(!!isLive);
     setEstadoRtmp(isLive ? 'conectado' : 'desconectado');
   }, [isLive]);
+
+  useEffect(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.style.setProperty('--progress-percentage', progreso);
+    }
+  }, [progreso]);
 
   return (
     <div className="page-wrapper">
@@ -103,9 +110,9 @@ const StreamerDashboard = ({ onLogout, user, onStartStream, onStopStream, isLive
             <div className="progress-label">Progreso hacia siguiente nivel:</div>
             <div className="progress">
               <div 
+                ref={progressBarRef}
                 id="hoursProgress" 
                 className="progress-bar"
-                style={{ width: `${progreso}%` }}
               ></div>
             </div>
             <div id="hoursToNext" className="progress-text">

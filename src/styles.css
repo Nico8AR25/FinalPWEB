@@ -407,7 +407,7 @@ header.navbar {
   background: linear-gradient(90deg, var(--twitch-purple), var(--twitch-purple-dark));
   border-radius: 12px;
   transition: width 0.3s ease;
-  width: 0%;
+  width: calc(var(--progress-percentage, 0) * 1%);
 }
 
 .progress-text {
@@ -746,6 +746,134 @@ header.navbar {
 
 .purchased-gifts-empty {
   color: #ccc;
+}
+
+.sidebar-container {
+  position: fixed;
+  left: 0;
+  top: 20px;
+  width: 260px;
+  height: 100vh;
+  background-color: #18181b;
+  color: white;
+  padding: 20px 15px;
+  border-right: 1px solid #333;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar-title {
+  margin-bottom: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.sidebar-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-item:hover {
+  background-color: #2a2a2d;
+}
+
+.sidebar-item-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-item-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sidebar-item-game {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.sidebar-item-viewers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-indicator {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.sidebar-viewer-count {
+  font-size: 14px;
+}
+
+.dashboard-with-sidebar {
+  margin-left: 270px;
+}
+
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.video-card {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.live-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: red;
+  color: white;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.video-preview {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 15px;
+  background-color: #1b1b1d;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.xp-bar-fill-dynamic {
+  height: 100%;
+  background: linear-gradient(90deg, var(--twitch-purple), var(--twitch-purple-hover));
+  border-radius: inherit;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-dynamic {
+  height: 100%;
+  background: linear-gradient(90deg, var(--twitch-purple), var(--twitch-purple-hover));
+  border-radius: inherit;
+  transition: width 0.3s ease;
 }
 
 /* Estilos del Tablero de Streamer */
