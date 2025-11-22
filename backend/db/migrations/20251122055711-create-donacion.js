@@ -1,20 +1,24 @@
 'use strict';
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('streams', {
+    await queryInterface.createTable('donacions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      titulo: {
-        type: Sequelize.STRING
-      },
-      descripcion: {
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.INTEGER
       },
       streamerId: {
+        type: Sequelize.INTEGER
+      },
+      streamId: {
+        type: Sequelize.INTEGER
+      },
+      monto: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -30,7 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('streams');
+    await queryInterface.dropTable('donacions');
   }
 };
-
