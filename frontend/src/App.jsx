@@ -59,20 +59,10 @@ function App() {
 	};
 
 	const manejarCerrarSesion = () => {
-		// Guardar en localStorage el estado actual del usuario (monedas, nivel, puntos)
-		// antes de limpiar el estado en memoria, para no perder cambios recientes.
+		// Limpiar usuario en localStorage y estado para cerrar sesión limpia
 		try {
-			const datosUsuario = JSON.parse(localStorage.getItem('user')) || {};
-			if (datosUsuario) {
-				datosUsuario.monedas = monedas ?? datosUsuario.monedas;
-				datosUsuario.nivel = nivelEspectador ?? datosUsuario.nivel;
-				datosUsuario.puntos = xpEspectador ?? datosUsuario.puntos;
-				localStorage.setItem('user', JSON.stringify(datosUsuario));
-			}
-		} catch {
-			// no bloqueante
-		}
-		// Solo limpiamos el estado en memoria para cerrar sesión en la app.
+			localStorage.removeItem('user');
+		} catch {}
 		setUsuario(null);
 	};
 
@@ -96,14 +86,47 @@ function App() {
 		setPuntosRecibidos(p => p + (puntos || 0));
 	};
 
-	const manejarRecarga = cantidad => {
+	const manejarRecarga = async cantidad => {
 		const valor = Number(cantidad) || 0;
+
+		// Si tenemos usuario con id, intentamos actualizar en el backend primero
+		if (usuario && usuario.id) {
+			try {
+				const res = await fetch('http://localhost:3080/users/recarga', {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ userId: usuario.id, monto: valor })
+				});
+
+				if (res.ok) {
+					const updatedUser = await res.json();
+					const nuevasMonedas = updatedUser.saldo ?? updatedUser.monedas ?? (monedas + valor);
+
+					// actualizar estado y localStorage con la respuesta del servidor
+					setMonedas(nuevasMonedas);
+					const datosUsuario = JSON.parse(localStorage.getItem('user')) || {};
+					const merged = { ...datosUsuario, ...updatedUser };
+					merged.monedas = nuevasMonedas;
+					try {
+						localStorage.setItem('user', JSON.stringify(merged));
+					} catch {}
+					return;
+				}
+				// si el servidor respondió con error, caemos al fallback
+			} catch (err) {
+				// fallo de conexión: seguimos con el fallback (sincronizar localmente)
+			}
+		}
+
+		// Fallback: actualizar solo en localStorage/estado (modo offline/demo)
 		setMonedas(c => {
 			const nuevasMonedas = c + valor;
 			const datosUsuario = JSON.parse(localStorage.getItem('user'));
 			if (datosUsuario) {
 				datosUsuario.monedas = nuevasMonedas;
-				localStorage.setItem('user', JSON.stringify(datosUsuario));
+				try {
+					localStorage.setItem('user', JSON.stringify(datosUsuario));
+				} catch {}
 			}
 			return nuevasMonedas;
 		});
@@ -122,12 +145,36 @@ function App() {
 	};
 
 	const manejarSubirNivel = () => {
-		setNivelEspectador(l => l + 1);
+		setNivelEspectador(l => {
+			const nuevo = l + 1;
+			// Persistir en backend si hay usuario
+			if (usuario && usuario.id) {
+				fetch('http://localhost:3080/users/nivel', {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ userId: usuario.id, nivel: nuevo })
+				}).catch(() => {});
+			}
+			// actualizar localStorage también se hace por el efecto
+			return nuevo;
+		});
 		setXpEspectador(0);
 		setXpMaxEspectador(m => Math.floor(m * 1.5));
 	};
 	const manejarAgregarXp = cantidad => {
-		setXpEspectador(x => Math.min(x + cantidad, xpMaxEspectador));
+		// Actualizamos estado localmente
+		setXpEspectador(x => {
+			const nuevo = Math.min(x + cantidad, xpMaxEspectador);
+			return nuevo;
+		});
+		// Persistir suma de puntos en backend si hay usuario
+		if (usuario && usuario.id) {
+			fetch('http://localhost:3080/users/puntos/add', {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ userId: usuario.id, delta: Number(cantidad) || 0 })
+			}).catch(() => {});
+		}
 	};
 
 	// Persistir cambios de nivel/XP en localStorage para mantener consistencia
@@ -209,6 +256,7 @@ function App() {
 									onSpend={manejarGastar}
 									xp={xpEspectador}
 									onEarnPoints={manejarAgregarXp}
+									user={usuario}
 								/>
 							) : (
 								<Navigate to="/" />

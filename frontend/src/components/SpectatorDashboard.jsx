@@ -6,6 +6,7 @@ const SpectatorDashboard = ({ onLogout, user, coins, level, xp }) => {
 	const [monedas, setMonedas] = useState(coins ?? user?.monedas ?? 0);
 	const nivel = level ?? user?.nivel ?? 1;
 	const puntos = xp ?? user?.puntos ?? 0;
+	const [purchasedGifts, setPurchasedGifts] = useState([]);
 
 	const streamers = [
 		{ nombre: 'pgod', espectadores: 680, video: '/videos/video1.mp4' },
@@ -17,6 +18,32 @@ const SpectatorDashboard = ({ onLogout, user, coins, level, xp }) => {
 	useEffect(() => {
 		setMonedas(coins ?? user?.monedas ?? 0);
 	}, [coins, user?.monedas]);
+
+	// Cargar regalos comprados para mostrar en el dashboard (fallback a localStorage)
+	useEffect(() => {
+		async function cargarRegalos() {
+			if (!user || !user.id) return setPurchasedGifts([]);
+			try {
+				const res = await fetch(`http://localhost:3080/users/${user.id}/regalos`);
+				if (res.ok) {
+					const data = await res.json();
+					setPurchasedGifts(data || []);
+					return;
+				}
+			} catch (err) {
+				// fallback
+			}
+			// fallback a localStorage
+			try {
+				const key = `regalos_comprados_${user.id}`;
+				const stored = JSON.parse(localStorage.getItem(key) || '[]');
+				setPurchasedGifts(Array.isArray(stored) ? stored : []);
+			} catch {
+				setPurchasedGifts([]);
+			}
+		}
+		cargarRegalos();
+	}, [user && user.id]);
 
 	const manejarBusqueda = () => {};
 
@@ -137,9 +164,19 @@ const SpectatorDashboard = ({ onLogout, user, coins, level, xp }) => {
 				<div className="purchased-gifts-section">
 					<h3>Mis Regalos Comprados</h3>
 					<div id="purchased-gifts-list" className="gifts-grid">
-						<p className="purchased-gifts-empty">
-							No has comprado ningún regalo aún
-						</p>
+						{purchasedGifts && purchasedGifts.length > 0 ? (
+							purchasedGifts.map((p) => (
+								<div key={p.id} className="gift-item">
+									<div className="gift-emoji">{(p.nombre || '').split(' ')[0]}</div>
+									<h4 className="gift-name">{(p.nombre || '').substring((p.nombre || '').indexOf(' ') + 1)}</h4>
+									<p className="gift-cost">💰 {p.costo} monedas</p>
+									<p className="gift-points">⭐ +{p.puntos} puntos</p>
+									<p className="gift-date">{new Date(p.createdAt).toLocaleString()}</p>
+								</div>
+							))
+						) : (
+							<p className="purchased-gifts-empty">No has comprado ningún regalo aún</p>
+						)}
 					</div>
 				</div>
 			</main>
